@@ -15,7 +15,7 @@ module ManageIQ::Providers
       end
 
       def configuration_profile_inv_to_hashes(profiles)
-        profiles.collect do |profile|
+        profiles.to_a.collect do |profile|
           {
             :type        => "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfigurationProfile",
             :manager_ref => profile["id"].to_s,
@@ -26,7 +26,7 @@ module ManageIQ::Providers
       end
 
       def configured_system_inv_to_hashes(configured_systems)
-        configured_systems.collect do |cs|
+        configured_systems.to_a.collect do |cs|
           {
             :type         => "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfiguredSystem",
             :manager_ref  => cs["id"].to_s,
