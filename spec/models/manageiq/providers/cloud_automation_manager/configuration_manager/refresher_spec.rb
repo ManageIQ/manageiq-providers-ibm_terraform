@@ -21,7 +21,25 @@ describe ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::Refr
         VCR.use_cassette(described_class.name.underscore) do
           EmsRefresh.refresh(ems)
         end
+
+        ems.reload
+
+        assert_ems_counts
+        assert_specific_configuration_profile
       end
+    end
+
+    def assert_ems_counts
+      expect(ems.configuration_profiles.count).to eq(169)
+    end
+
+    def assert_specific_configuration_profile
+      configuration_profile = ems.configuration_profiles.find_by(:manager_ref => "5d2f6030c068e4001c9bfbb7")
+      expect(configuration_profile).to have_attributes(
+        :type        => "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfigurationProfile",
+        :name        => "LAMP stack deployment on AWS",
+        :description => "LAMP - A fully-integrated environment for full stack PHP web development.",
+      )
     end
   end
 end

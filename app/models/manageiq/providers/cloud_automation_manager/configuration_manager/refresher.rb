@@ -32,11 +32,13 @@ module ManageIQ::Providers
       end
 
       def collect_configuration_inventory(connection, base_url)
+        result = {}
+
         # get tenant based on creds
         uri_str = base_url + ":30000/cam/tenant/api/v1/tenants/getTenantOnPrem"
         response = redirect_cam_api(uri_str,5,connection)
         body = response.body
-        # Get the ID 
+        # Get the ID
         tenant_id = JSON.parse(body)["id"]
         # For demo use default
         team = "default"
@@ -47,10 +49,9 @@ module ManageIQ::Providers
         # get stacks
         #template_uri_str = base_url + ":30000/cam/api/v1/stacks?tenantId=" + tenant_id + "&ace_orgGuid=" + all + "&cloudOE_spaceGuid=" + team
         template_body = redirect_cam_api(template_uri_str, 5, connection)
-        templates = JSON.parse(template_body.body)
+        result[:templates] = JSON.parse(template_body.body)
 
-        puts templates
-        {}
+        result
       end
     end
   end

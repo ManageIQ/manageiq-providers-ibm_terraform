@@ -9,18 +9,20 @@ module ManageIQ::Providers
 
       def configuration_inv_to_hashes(inv)
         {
-          :configuration_profiles => configuration_profile_inv_to_hashes(inv[:hostgroups]),
+          :configuration_profiles => configuration_profile_inv_to_hashes(inv[:templates]),
           :configured_systems     => configured_system_inv_to_hashes(inv[:hosts])
         }
       end
 
       def configuration_profile_inv_to_hashes(profiles)
+        type = "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfigurationProfile".freeze
+
         profiles.to_a.collect do |profile|
           {
-            :type        => "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfigurationProfile",
+            :type        => type,
             :manager_ref => profile["id"].to_s,
             :name        => profile["name"],
-            :description => profile["title"],
+            :description => profile["description"],
           }
         end
       end
