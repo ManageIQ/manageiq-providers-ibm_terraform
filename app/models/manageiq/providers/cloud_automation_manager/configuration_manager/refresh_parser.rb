@@ -10,7 +10,7 @@ module ManageIQ::Providers
       def configuration_inv_to_hashes(inv)
         {
           :configuration_profiles => configuration_profile_inv_to_hashes(inv[:templates]),
-          :configured_systems     => configured_system_inv_to_hashes(inv[:hosts])
+          :configured_systems     => configured_system_inv_to_hashes(inv[:stacks])
         }
       end
 
@@ -27,17 +27,18 @@ module ManageIQ::Providers
         end
       end
 
+
       def configured_system_inv_to_hashes(configured_systems)
         configured_systems.to_a.collect do |cs|
           {
             :type         => "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfiguredSystem",
             :manager_ref  => cs["id"].to_s,
             :hostname     => cs["name"],
-            :last_checkin => cs["last_compile"],
-            :build_state  => cs["build"] ? "pending" : nil,
-            :ipaddress    => cs["ip"],
-            :mac_address  => cs["mac"],
-            :ipmi_present => cs["sp_ip"].present?,
+            :last_checkin => cs["created_at"],
+            :build_state  => cs["build"],
+            :ipaddress    => cs["templateId"],
+            :mac_address  => cs["status"],
+            :ipmi_present => cs["templateName"]
           }
         end
       end
