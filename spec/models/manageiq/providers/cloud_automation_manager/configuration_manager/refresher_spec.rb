@@ -5,10 +5,10 @@ describe ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::Refr
 
   context "#refresh" do
     let(:provider) do
-      url = Rails.application.secrets.cam.try(:[], 'url') || 'CLOUD_AUTOMATION_MANAGER_URL'
+      url = Rails.application.secrets.cam.try(:[], :url) || 'CLOUD_AUTOMATION_MANAGER_URL'
       FactoryBot.create(:provider_cam, :url => url).tap do |p|
-        userid   = Rails.application.secrets.cam.try(:[], 'user') || 'CLOUD_AUTOMATION_MANAGER_USER'
-        password = Rails.application.secrets.cam.try(:[], 'password') || 'CLOUD_AUTOMATION_MANAGER_PASSWORD'
+        userid   = Rails.application.secrets.cam.try(:[], :user) || 'CLOUD_AUTOMATION_MANAGER_USER'
+        password = Rails.application.secrets.cam.try(:[], :password) || 'CLOUD_AUTOMATION_MANAGER_PASSWORD'
 
         p.update_authentication(:default => {:userid => userid, :password => password})
       end
