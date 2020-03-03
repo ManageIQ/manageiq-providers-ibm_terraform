@@ -72,14 +72,19 @@ class ManageIQ::Providers::CloudAutomationManager::Provider < ::Provider
     default_endpoint = args.dig("endpoints", "default")
     base_url, username, password, verify_ssl = default_endpoint&.values_at("base_url", "username", "password", "verify_ssl")
     verify_ssl = verify_ssl ? OpenSSL::SSL::VERIFY_PEER : OpenSSL::SSL::VERIFY_NONE
-    !!raw_connect(base_url, username, password, verify_ssl).verify?
+    !!raw_connect(base_url, username, password, verify_ssl)
   end
 
   def self.raw_connect(base_url, username, password, verify_ssl)
-    # TODO
+    url = URI(base_url + ":8443/v1/auth/identitytoken")
+    response = Net::HTTP.start(url.hostname, url.port, :use_ssl => true, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do | http | 
+      http.post(url,{"grant_type" => "password", "username" => username,"password" => password,"scope" => "openid"}.to_json, {"Content-Type" => "application/json"})
+    end
+    body = response.body
+    "Bearer #{JSON.parse(body)["access_token"]}"
   end
 
-  def connect(options = {})
+  def connect(options = {}) 
     auth_type = options[:auth_type]
     raise "no credentials defined" if self.missing_credentials?(auth_type)
 
@@ -96,7 +101,7 @@ class ManageIQ::Providers::CloudAutomationManager::Provider < ::Provider
     unless uri.kind_of?(URI::HTTPS)
       raise "URL has to be HTTPS"
     end
-    with_provider_connection(options.merge(:auth_type => auth_type), &:verify?)
+    !!self.class.raw_connect(url,*auth_user_pwd,false)
   rescue SocketError, Errno::ECONNREFUSED, RestClient::ResourceNotFound, RestClient::InternalServerError => err
     raise MiqException::MiqUnreachableError, err.message, err.backtrace
   rescue RestClient::Unauthorized => err
