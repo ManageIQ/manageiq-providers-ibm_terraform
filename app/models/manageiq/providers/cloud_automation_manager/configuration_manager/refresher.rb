@@ -1,4 +1,3 @@
-
 module ManageIQ::Providers
   module CloudAutomationManager
     class ConfigurationManager::Refresher < ManageIQ::Providers::BaseManager::Refresher
@@ -32,20 +31,28 @@ module ManageIQ::Providers
         result = {}
 
         # get tenant based on creds
-        uri_str = base_url + ":30000/cam/tenant/api/v1/tenants/getTenantOnPrem"
-        response = redirect_cam_api(uri_str,5,connection)
-        body = response.body
+        tenant_uri = URI.parse(base_url)
+        tenant_uri.port = 30000
+        tenant_uri.path = "/cam/tenant/api/v1/tenants/getTenantOnPrem"
+
+        response = redirect_cam_api(tenant_uri.to_s, 5,connection)
+
         # Get the ID
-        tenant_id = JSON.parse(body)["id"]
+        tenant_id = JSON.parse(response.body)["id"]
+
         # For demo use default
         team = "default"
         # Get all templates
         all = "all"
         # get all templates
-        template_uri_str = base_url + ":30000/cam/api/v1/templates?tenantId=" + tenant_id + "&ace_orgGuid=" + all + "&cloudOE_spaceGuid=" + team
+
+        template_uri = URI.parse(base_url)
+        template_uri.port = 30000
+        template_uri.path = "/cam/api/v1/templates"
+        template_uri.query = "tenantId=#{tenant_id}&ace_orgGuid=#{all}&cloudOE_spaceGuid=#{team}"
         # get stacks
         #template_uri_str = base_url + ":30000/cam/api/v1/stacks?tenantId=" + tenant_id + "&ace_orgGuid=" + all + "&cloudOE_spaceGuid=" + team
-        template_body = redirect_cam_api(template_uri_str, 5, connection)
+        template_body = redirect_cam_api(template_uri.to_s, 5, connection)
         result[:templates] = JSON.parse(template_body.body)
 
         result

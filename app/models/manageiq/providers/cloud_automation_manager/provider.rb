@@ -76,15 +76,29 @@ class ManageIQ::Providers::CloudAutomationManager::Provider < ::Provider
   end
 
   def self.raw_connect(base_url, username, password, verify_ssl)
-    url = URI(base_url + ":8443/v1/auth/identitytoken")
-    response = Net::HTTP.start(url.hostname, url.port, :use_ssl => true, :verify_mode => OpenSSL::SSL::VERIFY_NONE) do | http | 
-      http.post(url,{"grant_type" => "password", "username" => username,"password" => password,"scope" => "openid"}.to_json, {"Content-Type" => "application/json"})
+    url         = URI.parse(base_url)
+    url.port    = 8443
+    url.path    = "/v1/auth/identitytoken"
+    use_ssl     = url.scheme == "https"
+    verify_mode = verify_ssl ? OpenSSL::SSL::VERIFY_PEER : OpenSSL::SSL::VERIFY_NONE
+
+    response = Net::HTTP.start(url.hostname, url.port, :use_ssl => use_ssl, :verify_mode => verify_mode) do |http|
+      body    = {
+        "grant_type" => "password",
+        "username"   => username,
+        "password"   => password,
+        "scope"      => "openid"
+      }
+
+      headers = {"Content-Type" => "application/json"}
+
+      http.post(url, body.to_json, headers)
     end
-    body = response.body
-    "Bearer #{JSON.parse(body)["access_token"]}"
+
+    "Bearer #{JSON.parse(response.body)["access_token"]}"
   end
 
-  def connect(options = {}) 
+  def connect(options = {})
     auth_type = options[:auth_type]
     raise "no credentials defined" if self.missing_credentials?(auth_type)
 
@@ -98,10 +112,8 @@ class ManageIQ::Providers::CloudAutomationManager::Provider < ::Provider
 
   def verify_credentials(auth_type = nil, options = {})
     uri = URI.parse(url) unless url.blank?
-    unless uri.kind_of?(URI::HTTPS)
-      raise "URL has to be HTTPS"
-    end
-    !!self.class.raw_connect(url,*auth_user_pwd,false)
+
+    !!self.class.raw_connect(url, *auth_user_pwd, false)
   rescue SocketError, Errno::ECONNREFUSED, RestClient::ResourceNotFound, RestClient::InternalServerError => err
     raise MiqException::MiqUnreachableError, err.message, err.backtrace
   rescue RestClient::Unauthorized => err
