@@ -32,7 +32,6 @@ module ManageIQ::Providers
       end
 
       def collect_configuration_inventory(connection, base_url)
-        camclient = CamClient.new()
         # get tenant based on creds
         uri_str = base_url + ":30000/cam/tenant/api/v1/tenants/getTenantOnPrem"
         response = redirect_cam_api(uri_str,5,connection)
