@@ -5,7 +5,7 @@ describe ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::Refr
 
   context "#refresh" do
     let(:provider) do
-      url = Rails.application.secrets.cam.try(:[], :url) || 'CAM_URL'
+      url = Rails.application.secrets.cam.try(:[], :url) || 'cam_url'
       FactoryBot.create(:provider_cam, :url => "https://#{url}").tap do |p|
         userid   = Rails.application.secrets.cam.try(:[], :user) || 'CAM_USER'
         password = Rails.application.secrets.cam.try(:[], :password) || 'CAM_PASSWORD'
