@@ -8,38 +8,58 @@ module ManageIQ::Providers
       end
 
       def configuration_inv_to_hashes(inv)
-        {
-          :configuration_profiles => configuration_profile_inv_to_hashes(inv[:templates]),
-          :configured_systems     => configured_system_inv_to_hashes(inv[:stacks])
-        }
+        result = {}
+        uids = {}
+
+        result[:configuration_profiles], uids[:configuration_profiles] = configuration_profile_inv_to_hashes(inv[:templates])
+        result[:configured_systems], uids[:configured_systems] = configured_system_inv_to_hashes(inv[:stacks], uids[:configuration_profiles])
+
+        result
       end
 
       def configuration_profile_inv_to_hashes(profiles)
+        result = []
+        uids = {}
+
         type = "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfigurationProfile".freeze
 
-        profiles.to_a.collect do |profile|
-          {
+        profiles.to_a.each do |profile|
+          new_result = {
             :type        => type,
             :manager_ref => profile["id"].to_s,
             :name        => profile["name"],
             :description => profile["description"],
           }
+
+          result << new_result
+          uids[new_result[:manager_ref]] = new_result
         end
+
+        return result, uids
       end
 
-      def configured_system_inv_to_hashes(configured_systems)
-        configured_systems.to_a.collect do |cs|
-          {
-            :type         => "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfiguredSystem",
+      def configured_system_inv_to_hashes(configured_systems, configuration_profile_uids)
+        result = []
+        uids = {}
+
+        type = "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfiguredSystem".freeze
+
+        configured_systems.to_a.each do |cs|
+          new_result = {
+            :type         => type,
             :manager_ref  => cs["id"].to_s,
             :hostname     => cs["name"],
             :last_checkin => cs["created_at"],
             :build_state  => cs["build"],
-            :ipaddress    => cs["templateId"],
             :mac_address  => cs["status"],
-            :ipmi_present => cs["templateName"]
+            :configuration_profile => configuration_profile_uids[cs["templateId"]]
           }
+
+          result << new_result
+          uids[new_result[:manager_ref]] = new_result
         end
+
+        return result, uids
       end
     end
   end
