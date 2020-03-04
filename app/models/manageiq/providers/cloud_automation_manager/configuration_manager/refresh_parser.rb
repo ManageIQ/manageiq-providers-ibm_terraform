@@ -27,7 +27,6 @@ module ManageIQ::Providers
         end
       end
 
-
       def configured_system_inv_to_hashes(configured_systems)
         configured_systems.to_a.collect do |cs|
           {

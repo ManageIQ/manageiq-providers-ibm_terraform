@@ -1,19 +1,21 @@
-
 module ManageIQ::Providers
   module CloudAutomationManager
     class ConfigurationManager::Refresher < ManageIQ::Providers::BaseManager::Refresher
       def parse_legacy_inventory(manager)
         manager.with_provider_connection do |connection|
+          data = {}
+
           # get templates
           template_url_str = ":30000/cam/api/v1/templates"
-          type = "template"
-          data = collect_configuration_inventory(connection, manager.url, template_url_str, type)
-          ConfigurationManager::RefreshParser.configuration_inv_to_hashes(data)
+          data[:templates] = collect_configuration_inventory(connection, manager.url, template_url_str)
+
           # get configured systems
           stack_url_str = ":30000/cam/api/v1/stacks"
-          type = "stacks"
-          data_systems = collect_configuration_inventory(connection, manager.url, stack_url_str, type)
-          ConfigurationManager::RefreshParser.configuration_inv_to_hashes(data_systems)
+          puts collect_configuration_inventory(connection, manager.url, stack_url_str)
+          data[:stacks] = collect_configuration_inventory(connection, manager.url, stack_url_str)
+
+          puts data[:stacks]
+          ConfigurationManager::RefreshParser.configuration_inv_to_hashes(data)
         end
       end
 
@@ -36,8 +38,8 @@ module ManageIQ::Providers
         end
       end
 
-      def collect_configuration_inventory(connection, base_url, api_url, type)
-        result = {}
+
+      def collect_configuration_inventory(connection, base_url, api_url)
         # get tenant based on creds
         uri_str = base_url + ":30000/cam/tenant/api/v1/tenants/getTenantOnPrem"
         response = redirect_cam_api(uri_str,5,connection)
@@ -51,13 +53,8 @@ module ManageIQ::Providers
         # url to get all template resources
         template_uri_str = base_url + api_url + "?tenantId=" + tenant_id + "&ace_orgGuid=" + all + "&cloudOE_spaceGuid=" + team
         template_body = redirect_cam_api(template_uri_str, 5, connection)
-        if type == "templates"
-          result[:templates] = JSON.parse(template_body.body)
-        else
-          result[:stacks] = JSON.parse(template_body.body)
-        end
 
-        result
+        JSON.parse(template_body.body)
       end
     end
   end
