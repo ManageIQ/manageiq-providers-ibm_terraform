@@ -46,9 +46,16 @@ module ManageIQ::Providers
         template_uri.path = "/cam/api/v1/templates"
         template_uri.query = URI.encode_www_form("tenantId" => tenant_id, "ace_orgGuid" => all, "cloudOE_spaceGuid" => team)
 
-        #template_uri_str = base_url + ":30000/cam/api/v1/stacks?tenantId=" + tenant_id + "&ace_orgGuid=" + all + "&cloudOE_spaceGuid=" + team
-        template_body = redirect_cam_api(template_uri, 5, connection)
-        result[:templates] = JSON.parse(template_body.body)
+        response = redirect_cam_api(template_uri, 5, connection)
+        result[:templates] = JSON.parse(response.body)
+
+        stack_uri = URI.parse(base_url)
+        stack_uri.port = 30000
+        stack_uri.path = "/cam/api/v1/stacks"
+        stack_uri.query = URI.encode_www_form("tenantId" => tenant_id, "ace_orgGuid" => all, "cloudOE_spaceGuid" => team)
+
+        response = redirect_cam_api(stack_uri, 5, connection)
+        result[:stacks] = JSON.parse(response.body)
 
         result
       end
