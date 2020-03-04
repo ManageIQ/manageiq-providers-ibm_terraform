@@ -9,3 +9,8 @@
     :password:
     :port:
     :user:
+:workers:
+  :worker_base:
+    :queue_worker_base:
+      :ems_refresh_worker:
+        :ems_refresh_worker_cam_configuration: {}
