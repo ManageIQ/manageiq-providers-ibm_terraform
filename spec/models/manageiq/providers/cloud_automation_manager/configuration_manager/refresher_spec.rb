@@ -50,6 +50,11 @@ describe ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::Refr
         :type     => "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfiguredSystem",
         :hostname => "citidemo",
       )
+
+      expect(configured_system.configuration_profile).to have_attributes(
+        :manager_ref => "5e1887e5a2d364001dab98f6",
+        :name        => "Azure Create disk storage"
+      )
     end
   end
 end
