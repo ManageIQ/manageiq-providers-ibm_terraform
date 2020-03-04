@@ -14,9 +14,9 @@ module ManageIQ::Providers
 
       private
 
-      def redirect_cam_api(uri_str, limit = 5, connection)
+      def redirect_cam_api(url, limit = 5, connection)
         raise ArgumentError, 'HTTP redirect too deep' if limit == 0
-        url = URI.parse(uri_str)
+
         req = Net::HTTP::Get.new(url, { 'Authorization' => connection, 'Accept' => "application/json", "Content-Type" => "application/json"})
         response = Net::HTTP.start(url.host, url.port, use_ssl: true, :verify_mode => OpenSSL::SSL::VERIFY_NONE) { |http| http.request(req) }
         case response
@@ -35,7 +35,7 @@ module ManageIQ::Providers
         tenant_uri.port = 30000
         tenant_uri.path = "/cam/tenant/api/v1/tenants/getTenantOnPrem"
 
-        response = redirect_cam_api(tenant_uri.to_s, 5, connection)
+        response = redirect_cam_api(tenant_uri, 5, connection)
         tenant_id = JSON.parse(response.body)["id"]
 
         team = "default"
@@ -47,7 +47,7 @@ module ManageIQ::Providers
         template_uri.query = URI.encode_www_form("tenantId" => tenant_id, "ace_orgGuid" => all, "cloudOE_spaceGuid" => team)
 
         #template_uri_str = base_url + ":30000/cam/api/v1/stacks?tenantId=" + tenant_id + "&ace_orgGuid=" + all + "&cloudOE_spaceGuid=" + team
-        template_body = redirect_cam_api(template_uri.to_s, 5, connection)
+        template_body = redirect_cam_api(template_uri, 5, connection)
         result[:templates] = JSON.parse(template_body.body)
 
         result
