@@ -26,11 +26,13 @@ describe ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::Refr
 
         assert_ems_counts
         assert_specific_configuration_profile
+        assert_specific_configured_system
       end
     end
 
     def assert_ems_counts
       expect(ems.configuration_profiles.count).to eq(169)
+      expect(ems.configured_systems.count).to     eq(2)
     end
 
     def assert_specific_configuration_profile
@@ -39,6 +41,14 @@ describe ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::Refr
         :type        => "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfigurationProfile",
         :name        => "LAMP stack deployment on AWS",
         :description => "LAMP - A fully-integrated environment for full stack PHP web development.",
+      )
+    end
+
+    def assert_specific_configured_system
+      configured_system = ems.configured_systems.find_by(:manager_ref => "5e1888c3a2d364001dab98f8")
+      expect(configured_system).to have_attributes(
+        :type     => "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfiguredSystem",
+        :hostname => "citidemo",
       )
     end
   end
