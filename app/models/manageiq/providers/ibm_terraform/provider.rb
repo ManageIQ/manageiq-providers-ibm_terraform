@@ -1,7 +1,7 @@
-class ManageIQ::Providers::CloudAutomationManager::Provider < ::Provider
+class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
   has_one :configuration_manager,
           :foreign_key => "provider_id",
-          :class_name  => "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager",
+          :class_name  => "ManageIQ::Providers::IbmTerraform::ConfigurationManager",
           :dependent   => :destroy,
           :autosave    => true
 

@@ -1,8 +1,8 @@
 module ManageIQ
   module Providers
-    module CloudAutomationManager
+    module IbmTerraform
       class Engine < ::Rails::Engine
-        isolate_namespace ManageIQ::Providers::CloudAutomationManager
+        isolate_namespace ManageIQ::Providers::IbmTerraform
 
         config.autoload_paths << root.join('lib').to_s
 
@@ -11,7 +11,7 @@ module ManageIQ
         end
 
         def self.plugin_name
-          _('ManageIQ Providers Cloud Automation Manager')
+          _('ManageIQ Providers IBM Terraform')
         end
       end
     end

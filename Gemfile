@@ -1,4 +1,4 @@
-# Declare your gem's dependencies in manageiq-providers-cloud_automation_manager.gemspec.
+# Declare your gem's dependencies in manageiq-providers-ibm_terraform.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec

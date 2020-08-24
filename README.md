@@ -1,14 +1,14 @@
-# ManageIQ::Providers::CloudAutomationManager
+# ManageIQ::Providers::IbmTerraform
 
-[![Gem Version](https://badge.fury.io/rb/manageiq-providers-cloud_automation_manager.svg)](http://badge.fury.io/rb/manageiq-providers-cloud_automation_manager)
-[![Build Status](https://travis-ci.org/ManageIQ/manageiq-providers-cloud_automation_manager.svg?branch=master)](https://travis-ci.org/ManageIQ/manageiq-providers-cloud_automation_manager)
-[![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-cloud_automation_manager.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-cloud_automation_manager)
-[![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-cloud_automation_manager/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-cloud_automation_manager/coverage)
-[![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-cloud_automation_manager/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-cloud_automation_manager/master)
+[![Gem Version](https://badge.fury.io/rb/manageiq-providers-ibm_terraform.svg)](http://badge.fury.io/rb/manageiq-providers-ibm_terraform)
+[![Build Status](https://travis-ci.org/ManageIQ/manageiq-providers-ibm_terraform.svg?branch=master)](https://travis-ci.org/ManageIQ/manageiq-providers-ibm_terraform)
+[![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform)
+[![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/coverage)
+[![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-ibm_terraform/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-ibm_terraform/master)
 
-[![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-cloud_automation_manager?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-ibm_terraform?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Cloud Automation Manager plugin for ManageIQ
+IBM Terraform plugin for ManageIQ
 
 ## Development
 

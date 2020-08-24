@@ -1,10 +1,10 @@
 :ems:
-  :ems_cloud_automation_manager:
+  :ems_ibm_terraform:
     :blacklisted_event_names: []
     :event_handling:
       :event_groups:
 :http_proxy:
-  :cloud_automation_manager:
+  :ibm_terraform:
     :host:
     :password:
     :port:
@@ -13,4 +13,4 @@
   :worker_base:
     :queue_worker_base:
       :ems_refresh_worker:
-        :ems_refresh_worker_cam_configuration: {}
+        :ems_refresh_worker_ibm_terraform: {}

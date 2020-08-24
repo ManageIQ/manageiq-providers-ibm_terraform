@@ -1,5 +1,5 @@
 module ManageIQ::Providers
-  module CloudAutomationManager
+  module IbmTerraform
     class ConfigurationManager::RefreshParser
       include Vmdb::Logging
 
@@ -21,7 +21,7 @@ module ManageIQ::Providers
         result = []
         uids = {}
 
-        type = "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfigurationProfile".freeze
+        type = "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfigurationProfile".freeze
 
         profiles.to_a.each do |profile|
           new_result = {
@@ -42,7 +42,7 @@ module ManageIQ::Providers
         result = []
         uids = {}
 
-        type = "ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfiguredSystem".freeze
+        type = "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem".freeze
 
         configured_systems.to_a.each do |cs|
           new_result = {
