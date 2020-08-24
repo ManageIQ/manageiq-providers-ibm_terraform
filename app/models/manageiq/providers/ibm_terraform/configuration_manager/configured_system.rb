@@ -1,4 +1,4 @@
-class ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::ConfiguredSystem < ::ConfiguredSystem
+class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem < ::ConfiguredSystem
   include ProviderObjectMixin
 
   def provider_object(connection = nil)
@@ -10,7 +10,7 @@ class ManageIQ::Providers::CloudAutomationManager::ConfigurationManager::Configu
   end
 
   def self.display_name(number = 1)
-    n_('Configured System (Cloud Automation Manager)', 'Configured Systems (Cloud Automation Manager)', number)
+    n_('Configured System (IBM Terraform)', 'Configured Systems (IBM Terraform)', number)
   end
 
   private

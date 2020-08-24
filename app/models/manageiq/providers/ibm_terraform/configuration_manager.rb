@@ -1,4 +1,4 @@
-class ManageIQ::Providers::CloudAutomationManager::ConfigurationManager < ManageIQ::Providers::ConfigurationManager
+class ManageIQ::Providers::IbmTerraform::ConfigurationManager < ManageIQ::Providers::ConfigurationManager
   require_nested :ConfigurationProfile
   require_nested :ConfiguredSystem
   require_nested :Refresher
@@ -17,22 +17,22 @@ class ManageIQ::Providers::CloudAutomationManager::ConfigurationManager < Manage
   class << self
     delegate :params_for_create,
              :verify_credentials,
-             :to => ManageIQ::Providers::CloudAutomationManager::Provider
+             :to => ManageIQ::Providers::IbmTerraform::Provider
   end
 
   def self.ems_type
-    @ems_type ||= "cam_configuration".freeze
+    @ems_type ||= "ibm_terraform_configuration".freeze
   end
 
   def self.description
-    @description ||= "Cloud Automation Manager Configuration".freeze
+    @description ||= "IBM Terraform Configuration".freeze
   end
 
   def image_name
-    "cam_configuration"
+    "ibm_terraform_configuration"
   end
 
   def self.display_name(number = 1)
-    n_('Configuration Manager (Cloud Automation Manager)', 'Configuration Managers (Cloud Automation Manager)', number)
+    n_('Configuration Manager (IBM Terraform)', 'Configuration Managers (IBM Terraform)', number)
   end
 end
