@@ -13,4 +13,4 @@
   :worker_base:
     :queue_worker_base:
       :ems_refresh_worker:
-        :ems_refresh_worker_ibm_terraform_configuration: {}
+        :ems_refresh_worker_ibm_terraform: {}

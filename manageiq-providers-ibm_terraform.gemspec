@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ManageIQ::Providers::IbmTerraform::VERSION
   spec.authors       = ["ManageIQ Authors"]
 
-  spec.summary       = "Cloud Automation Manager plugin for ManageIQ"
-  spec.description   = "Cloud Automation Manager plugin for ManageIQ"
+  spec.summary       = "IBM Terraform plugin for ManageIQ"
+  spec.description   = "IBM Terraform plugin for ManageIQ"
   spec.homepage      = "https://github.com/ManageIQ/manageiq-providers-ibm_terraform"
   spec.license       = "Apache-2.0"
 

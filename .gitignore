@@ -1,6 +1,5 @@
 .rubocop-*
 /.bundle/
-/.project/
 /.yardoc
 /Gemfile.lock
 /_yardoc/
