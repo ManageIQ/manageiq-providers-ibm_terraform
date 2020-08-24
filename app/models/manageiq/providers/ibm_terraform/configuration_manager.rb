@@ -2,7 +2,6 @@ class ManageIQ::Providers::IbmTerraform::ConfigurationManager < ManageIQ::Provid
   require_nested :ConfigurationProfile
   require_nested :ConfiguredSystem
   require_nested :Refresher
-  require_nested :RefreshParser
   require_nested :RefreshWorker
 
   include ProcessTasksMixin
