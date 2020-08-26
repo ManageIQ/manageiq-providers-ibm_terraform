@@ -1,7 +1,6 @@
 # ManageIQ::Providers::IbmTerraform
 
-[![Gem Version](https://badge.fury.io/rb/manageiq-providers-ibm_terraform.svg)](http://badge.fury.io/rb/manageiq-providers-ibm_terraform)
-[![Build Status](https://travis-ci.org/ManageIQ/manageiq-providers-ibm_terraform.svg?branch=master)](https://travis-ci.org/ManageIQ/manageiq-providers-ibm_terraform)
+[![Build Status](https://travis-ci.com/ManageIQ/manageiq-providers-ibm_terraform.svg?branch=master)](https://travis-ci.com/ManageIQ/manageiq-providers-ibm_terraform)
 [![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform)
 [![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/coverage)
 [![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-ibm_terraform/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-ibm_terraform/master)
