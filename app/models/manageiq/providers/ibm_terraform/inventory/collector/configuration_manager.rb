@@ -41,7 +41,10 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Collector::ConfigurationMana
     raise ArgumentError, 'HTTP redirect too deep' if limit == 0
 
     req = Net::HTTP::Get.new(url, {'Authorization' => connection, 'Accept' => "application/json", "Content-Type" => "application/json"})
-    response = Net::HTTP.start(url.host, url.port, use_ssl: true, :verify_mode => OpenSSL::SSL::VERIFY_NONE) { |http| http.request(req) }
+
+    verify_ssl = manager.default_endpoint.verify_ssl
+
+    response = Net::HTTP.start(url.host, url.port, use_ssl: true, :verify_mode => verify_ssl) { |http| http.request(req) }
     case response
     when Net::HTTPSuccess     then response
     when Net::HTTPRedirection then redirect_cam_api(response['location'], limit - 1)
