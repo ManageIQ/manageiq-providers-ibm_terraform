@@ -19,7 +19,7 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
   validates :url,  :presence => true
 
   def self.description
-    @description ||= "Cloud Automation Manager".freeze
+    @description ||= "IBM Terraform Configuration".freeze
   end
 
   def self.params_for_create
@@ -40,6 +40,13 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
                   :component  => "text-field",
                   :name       => "endpoints.default.url",
                   :label      => _("URL"),
+                  :isRequired => true,
+                  :validate   => [{:type => "required-validator"}]
+                },
+                {
+                  :component  => "text-field",
+                  :name       => "endpoints.identity.url",
+                  :label      => _("Identity URL"),
                   :isRequired => true,
                   :validate   => [{:type => "required-validator"}]
                 },
@@ -87,6 +94,9 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
   # Verify Credentials
   # args: {
   #  "endpoints" => {
+  #    "identity" => {
+  #       "url" => nil
+  #    },    
   #    "default" => {
   #       "url" => nil,
   #       "verify_ssl" => nil
@@ -101,19 +111,18 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
   # }
   def self.verify_credentials(args)
     default_authentication = args.dig("authentications", "default")
-    base_url = args.dig("endpoints", "default", "url")
+    identity_url = args.dig("endpoints", "identity", "url")
     verify_mode = args.dig("endpoints", "default", "verify_ssl")
 
     userid   = default_authentication["userid"]
     password = MiqPassword.try_decrypt(default_authentication["password"])
 
-    !!raw_connect(base_url, userid, password, verify_mode)
+    !!raw_connect(identity_url, userid, password, verify_mode)
   end
 
   def self.raw_connect(base_url, username, password, verify_mode)
     url      = URI.parse(base_url)
-    url.port = 8443
-    url.path = "/v1/auth/identitytoken"
+    url.path = "/idprovider/v1/auth/identitytoken"
     use_ssl  = url.scheme == "https"
 
     require "net/http"
@@ -133,12 +142,18 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
     "Bearer #{JSON.parse(response.body)["access_token"]}"
   end
 
+  def identity_url
+    identity_endpoint = endpoints.detect { |e| e.role == "identity" }
+    identity_endpoint || endpoints.build(:role => "identity")
+    return identity_endpoint.url
+  end
+
   def connect(options = {})
     auth_type = options[:auth_type]
     raise "no credentials defined" if self.missing_credentials?(auth_type)
 
     verify_ssl = options[:verify_ssl] || self.verify_ssl
-    base_url   = options[:url] || url
+    base_url   = options[:url] || identity_url
     username   = options[:username] || authentication_userid(auth_type)
     password   = options[:password] || authentication_password(auth_type)
 
@@ -146,9 +161,8 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
   end
 
   def verify_credentials(auth_type = nil, options = {})
-    uri = URI.parse(url) unless url.blank?
-
-    !!self.class.raw_connect(url, *auth_user_pwd, false)
+    verify_ssl = options[:verify_ssl] || self.verify_ssl
+    !!self.class.raw_connect(identity_url, *auth_user_pwd, verify_ssl)
   rescue SocketError, Errno::ECONNREFUSED, RestClient::ResourceNotFound, RestClient::InternalServerError => err
     raise MiqException::MiqUnreachableError, err.message, err.backtrace
   rescue RestClient::Unauthorized => err
