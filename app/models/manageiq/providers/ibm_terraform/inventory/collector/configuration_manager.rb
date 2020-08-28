@@ -9,6 +9,16 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Collector::ConfigurationMana
     end
   end
 
+  def virtual_machines
+    @virtual_machines ||= begin
+      iaas_resource_virtual_machine_uri = URI.parse(manager.url)
+      iaas_resource_virtual_machine_uri.path = "/cam/api/v1/iaasresources"
+      iaas_resource_virtual_machine_uri.query = URI.encode_www_form("filter" => '{"where": {"type": "virtual_machine"}}', "tenantId" => tenant_id, "ace_orgGuid" => "all")
+      response = redirect_cam_api(iaas_resource_virtual_machine_uri)
+      JSON.parse(response.body)
+    end
+  end
+
   def stacks
     stack_uri = URI.parse(manager.url)
     stack_uri.path = "/cam/api/v1/stacks"

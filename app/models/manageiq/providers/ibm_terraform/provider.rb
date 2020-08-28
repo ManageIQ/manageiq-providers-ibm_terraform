@@ -39,14 +39,16 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
                 {
                   :component  => "text-field",
                   :name       => "endpoints.default.url",
-                  :label      => _("URL"),
+                  :label      => _("Managed Services URL"),
+                  :helperText => _("Managed Services URL. e.g. https://cam.apps.mydomain.com"),
                   :isRequired => true,
                   :validate   => [{:type => "required-validator"}]
                 },
                 {
                   :component  => "text-field",
                   :name       => "endpoints.identity.url",
-                  :label      => _("Identity URL"),
+                  :label      => _("CloudPak for MCM URL"),
+                  :helperText => _("CloudPak for MCM URL. e.g. https://cp-console.apps.mydomain.com"),
                   :isRequired => true,
                   :validate   => [{:type => "required-validator"}]
                 },
@@ -71,7 +73,7 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
                   :component  => "text-field",
                   :name       => "authentications.default.userid",
                   :label      => _("Username"),
-                  :helperText => _("Should have privileged access, such as root or administrator."),
+                  :helperText => _("Should have privileged access, such as administrator."),
                   :isRequired => true,
                   :validate   => [{:type => "required-validator"}]
                 },
