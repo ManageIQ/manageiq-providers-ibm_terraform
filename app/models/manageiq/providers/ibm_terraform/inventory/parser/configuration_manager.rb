@@ -41,10 +41,10 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
   def configured_systems
     collector.virtual_machines.each do |virtual_machine|
       persister.configured_systems.build(
-        :manager_ref           => virtual_machine["id"].to_s,
-        :name                  => virtual_machine["name"] + ' - ' + virtual_machine["ipaddresses"].to_s,
-        :ipaddress             => virtual_machine["ipaddresses"].to_s,
-        :virtual_instance_ref  => virtual_machine["idFromProvider"]
+        :manager_ref          => virtual_machine["id"].to_s,
+        :name                 => virtual_machine["name"] + ' - ' + virtual_machine["ipaddresses"].to_s,
+        :ipaddress            => virtual_machine["ipaddresses"].to_s,
+        :virtual_instance_ref => virtual_machine["idFromProvider"]
       )
     end
   end

@@ -98,7 +98,7 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
   #  "endpoints" => {
   #    "identity" => {
   #       "url" => nil
-  #    },    
+  #    },
   #    "default" => {
   #       "url" => nil,
   #       "verify_ssl" => nil
@@ -146,8 +146,8 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
 
   def identity_url
     identity_endpoint = endpoints.detect { |e| e.role == "identity" }
-    identity_endpoint || endpoints.build(:role => "identity")
-    return identity_endpoint.url
+    identity_endpoint ||= endpoints.build(:role => "identity")
+    identity_endpoint.url
   end
 
   def connect(options = {})
