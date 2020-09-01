@@ -11,12 +11,17 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
            :url=,
            :to => :default_endpoint
 
+  delegate :url,
+           :url=,
+           :to => :identity_endpoint, prefix: :identity
+
   virtual_column :url, :type => :string, :uses => :endpoints
 
   before_validation :ensure_managers
 
   validates :name, :presence => true, :uniqueness => true
   validates :url,  :presence => true
+  validates :identity_url,  :presence => true
 
   def self.description
     @description ||= "IBM Terraform Configuration".freeze
@@ -144,10 +149,9 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
     "Bearer #{JSON.parse(response.body)["access_token"]}"
   end
 
-  def identity_url
+  def identity_endpoint
     identity_endpoint = endpoints.detect { |e| e.role == "identity" }
-    identity_endpoint ||= endpoints.build(:role => "identity")
-    identity_endpoint.url
+    identity_endpoint || endpoints.build(:role => "identity")
   end
 
   def connect(options = {})

@@ -6,7 +6,8 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
   context "#refresh" do
     let(:provider) do
       url = Rails.application.secrets.cam.try(:[], :url) || 'cam_url'
-      FactoryBot.create(:provider_ibm_terraform, :url => "https://#{url}").tap do |p|
+      identity_url = Rails.application.secrets.cam.try(:[], :identity_url) || 'identity_url'
+      FactoryBot.create(:provider_ibm_terraform, :url => "https://#{url}", :identity_url => "https://#{identity_url}").tap do |p|
         userid   = Rails.application.secrets.cam.try(:[], :user) || 'CAM_USER'
         password = Rails.application.secrets.cam.try(:[], :password) || 'CAM_PASSWORD'
 
