@@ -19,14 +19,6 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Collector::ConfigurationMana
     end
   end
 
-  def stacks
-    stack_uri = URI.parse(manager.url)
-    stack_uri.path = "/cam/api/v1/stacks"
-    stack_uri.query = URI.encode_www_form("tenantId" => tenant_id, "ace_orgGuid" => "all")
-    response = redirect_cam_api(stack_uri)
-    JSON.parse(response.body)
-  end
-
   private
 
   def tenant_id
