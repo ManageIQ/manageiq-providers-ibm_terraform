@@ -2,7 +2,6 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Collector::ConfigurationMana
   def templates
     @templates ||= begin
       template_uri = URI.parse(manager.url)
-      template_uri.port = 30000
       template_uri.path = "/cam/api/v1/templates"
       template_uri.query = URI.encode_www_form("tenantId" => tenant_id, "ace_orgGuid" => "all", "cloudOE_spaceGuid" => "default")
       response = redirect_cam_api(template_uri)
@@ -12,7 +11,6 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Collector::ConfigurationMana
 
   def stacks
     stack_uri = URI.parse(manager.url)
-    stack_uri.port = 30000
     stack_uri.path = "/cam/api/v1/stacks"
     stack_uri.query = URI.encode_www_form("tenantId" => tenant_id, "ace_orgGuid" => "all", "cloudOE_spaceGuid" => "default")
 
@@ -25,7 +23,6 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Collector::ConfigurationMana
   def tenant_id
     @tenant_id ||= begin
       tenant_uri = URI.parse(manager.url)
-      tenant_uri.port = 30000
       tenant_uri.path = "/cam/tenant/api/v1/tenants/getTenantOnPrem"
 
       res = redirect_cam_api(tenant_uri)
