@@ -46,15 +46,10 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
     end
 
     def assert_specific_configured_system
-      configured_system = ems.configured_systems.find_by(:manager_ref => "5e1888c3a2d364001dab98f8")
+      configured_system = ems.configured_systems.find_by(:manager_ref => "5eac8d80ed4fa000171eaa23")
       expect(configured_system).to have_attributes(
         :type     => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem",
-        :hostname => "citidemo",
-      )
-
-      expect(configured_system.configuration_profile).to have_attributes(
-        :manager_ref => "5e1887e5a2d364001dab98f6",
-        :name        => "Azure Create disk storage"
+        :hostname => "aws_instance.orpheus_ubuntu_micro"
       )
     end
   end
