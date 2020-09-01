@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://cam_url:8443/v1/auth/identitytoken
+    uri: https://identity_url/idprovider/v1/auth/identitytoken
     body:
       encoding: UTF-8
       string: '{"grant_type":"password","username":"CAM_USER","password":"CAM_PASSWORD","scope":"openid"}'
@@ -60,7 +60,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:35 GMT
 - request:
     method: get
-    uri: https://cam_url:30000/cam/tenant/api/v1/tenants/getTenantOnPrem
+    uri: https://cam_url/cam/tenant/api/v1/tenants/getTenantOnPrem
     body:
       encoding: US-ASCII
       string: ''
@@ -122,7 +122,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:36 GMT
 - request:
     method: get
-    uri: https://cam_url:30000/cam/api/v1/templates?ace_orgGuid=all&cloudOE_spaceGuid=default&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    uri: https://cam_url/cam/api/v1/templates?ace_orgGuid=all&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
     body:
       encoding: US-ASCII
       string: ''
@@ -191,7 +191,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:36 GMT
 - request:
     method: get
-    uri: https://cam_url:30000/cam/api/v1/stacks?ace_orgGuid=all&cloudOE_spaceGuid=default&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    uri: https://cam_url/cam/api/v1/stacks?ace_orgGuid=all&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
     body:
       encoding: US-ASCII
       string: ''
@@ -259,6 +259,74 @@ http_interactions:
         Jan 10 2020 14:23:02 GMT+0000 (UTC) Running terraform init ... ","status":"SUCCESS","applied_action":"CREATE","applied_output_datatype":"","applied_status":"SUCCESS","stack_id":"b4ecf760-33b4-11ea-806d-41dadd4e9b0e"},{"name":"enablement_demo","created_at":"2020-01-21T13:59:24.933Z","templateId":"5e1887e5a2d364001dab98f6","namespaceId":"default","templateName":"Azure
         Create disk storage","templateCategory":"userCreated","templateProvider":"Other","template_type":"Terraform","applied_state_id":"5e2703bd8a7926001dff2eae","latest_state_id":"5e2703bd8a7926001dff2eae","cloud_connection_ids":["5d2f602ec068e4001c9bfb9e"],"stackRelease":"v2","lastUpdatedAt":"2020-01-21T13:59:49.142Z","id":"5e2703bc8a7926001dff2ead","tenantId":"f58e4d39-ac01-40fb-b259-88cd9a33f8e8","action":"CREATE","message":"Tue
         Jan 21 2020 13:59:30 GMT+0000 (UTC) Running terraform init ... ","status":"FAILED","applied_action":"CREATE","applied_output_datatype":"","applied_status":"FAILED","stack_id":"3dbf9080-3c56-11ea-b1a6-c3ec78a3dfe8"}]'
+    http_version: null
+  recorded_at: Wed, 04 Mar 2020 16:29:38 GMT
+- request:
+    method: get
+    uri: https://cam_url/cam/api/v1/iaasresources?filter={%22where%22:%20{%22type%22:%20%20%22virtual_machine%22}}&ace_orgGuid=all&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer 050cfeb99881054cd9c7741baad7e18ad6ff09f3fdcd81a886341ae176ae183850cf386b5e7a4639d0835805bc794c055ebb3eba60533004ad822464f7885a4f9b15b30aa9895a999e40287283e5cf2b001db5a5c12c89f6c9c18f2833e2615e59ebcc77e63d6931b149899d4f75addc8f5f09a5929c423504224752cdfc757a8b1ae8f6195cbe7dd6c4ff845f00552baa529f2f33013fef3eea6ca69eb00a1dd7eed0d4f081164dd76b854dfc14e9eb98e11a1655880bc9fb68fc848eac7a7f42380d7c335aecbd580b6a231e1b7f0192664e40fc054b1293ce2cf9b65d6d6f626c1c4f4e13d62d4d9866db824477be3486002463621b30e3e740980b8ba578d2413b5ee16f3609b67fcb13a9061604e3301e6aeea70e7340223eb3daa4dcae8e446495bd3569417f9ea921e32bd56febda0b5f7f5c7abcf69595ee0b60fa5b13030817059422c6af414babd4c9077589f7440c4688d6e9f8db328f3bcfe7fca0aa92f6674dab9fe4cd0ea73884b0711936222bfdcd44c66b9773394e2f82c1f5335dc46dea85be4d4a1ffaf154e28d3a336bf2a0ba9d79682d4a13eaed6c67c582a48c46d0d4c37f9d4dae6ff951d1edc6de21c8e9b18a6886f81d0e70fab8704caa80f4e4b45c681141defb65a227e180bf43862d68a240a72d4f400017758b522e69dea907b5f11de74206face6839028c1367dae161a694fb53fffaa0d0
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 04 Mar 2020 16:29:37 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Origin, Accept-Encoding
+      Access-Control-Allow-Credentials:
+      - 'true'
+      - 'true'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      X-Download-Options:
+      - noopen
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Origin:
+      - "*"
+      - "*"
+      X-Request-Id:
+      - cb8f4dbe-d91a-4c56-9639-7408d76ab948
+      X-Dns-Prefetch-Control:
+      - 'off'
+      Etag:
+      - W/"636-JmnUddfRQAxwyVrdGpQ33zE37Zo"
+      Set-Cookie:
+      - connect.sid=s%3ADFHYJDOXmg3NGRDh6OP2czooZdgWz1bq.fZg6zx%2FImETy2xoWqKxF79v%2BedD3YoD46WcarbFhens;
+        Path=/; HttpOnly; Secure
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With
+    body:
+      encoding: ASCII-8BIT
+      string: '[ { "type": "virtual_machine", "name": "aws_instance.orpheus_ubuntu_micro", "stackId": "5eac8d41ed4fa000171eaa1b", "provider": "Amazon EC2", "idFromProvider": "i-0361c15366e550109", "typeFromProvider": "aws_instance", "module_path": [ "root" ], "consolelinks": [ "https://console.aws.amazon.com/ec2/v2/home" ], "ipaddresses": [ "172.88.10.15" ], "tainted": false, "tenantId": "f58e4d39-ac01-40fb-b259-88cd9a33f8e8", "namespaceId": "eks-cluster-13", "namespaceMapping": true, "id": "5eac8d80ed4fa000171eaa23" }, { "type": "virtual_machine", "name": "aws_instance.db-server", "stackId": "5ee8dd8b6143d40017c2ee3c", "provider": "Amazon EC2", "idFromProvider": "i-01d992f6d1f8c04aa", "typeFromProvider": "aws_instance", "module_path": [ "root" ], "consolelinks": [ "https://console.aws.amazon.com/ec2/v2/home" ], "ipaddresses": [ "18.212.88.88", "172.31.10.88" ], "tainted": false, "tenantId": "f58e4d39-ac01-40fb-b259-88cd9a33f8e8", "namespaceId": "acme", "namespaceMapping": true, "id": "5ee8ddde6143d40017c2ee44" } ]'
     http_version: null
   recorded_at: Wed, 04 Mar 2020 16:29:38 GMT
 recorded_with: VCR 5.1.0

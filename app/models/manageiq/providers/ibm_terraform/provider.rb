@@ -13,15 +13,15 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
 
   delegate :url,
            :url=,
-           :to => :identity_endpoint, prefix: :identity
+           :to => :identity_endpoint, :prefix => "identity"
 
   virtual_column :url, :type => :string, :uses => :endpoints
 
   before_validation :ensure_managers
 
-  validates :name, :presence => true, :uniqueness => true
-  validates :url,  :presence => true
-  validates :identity_url,  :presence => true
+  validates :name,         :presence => true, :uniqueness => true
+  validates :url,          :presence => true
+  validates :identity_url, :presence => true
 
   def self.description
     @description ||= "IBM Terraform Configuration".freeze
