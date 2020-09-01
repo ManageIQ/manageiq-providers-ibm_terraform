@@ -122,7 +122,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:36 GMT
 - request:
     method: get
-    uri: https://cam_url/cam/api/v1/templates?ace_orgGuid=all&cloudOE_spaceGuid=default&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    uri: https://cam_url/cam/api/v1/templates?ace_orgGuid=all&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
     body:
       encoding: US-ASCII
       string: ''
@@ -191,7 +191,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:36 GMT
 - request:
     method: get
-    uri: https://cam_url/cam/api/v1/stacks?ace_orgGuid=all&cloudOE_spaceGuid=default&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    uri: https://cam_url/cam/api/v1/iaasresources?ace_orgGuid=all&filter=%7B%22where%22:%20%7B%22type%22:%20%22virtual_machine%22%7D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
     body:
       encoding: US-ASCII
       string: ''
@@ -240,7 +240,7 @@ http_interactions:
       - "*"
       - "*"
       X-Request-Id:
-      - cb8f4dbe-d91a-4c56-9639-7408d76ab648
+      - cb8f4dbe-d91a-4c56-9639-7408d76ab948
       X-Dns-Prefetch-Control:
       - 'off'
       Etag:
@@ -254,11 +254,7 @@ http_interactions:
       - Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With
     body:
       encoding: ASCII-8BIT
-      string: '[{"name":"citidemo","created_at":"2020-01-10T14:22:59.586Z","templateId":"5e1887e5a2d364001dab98f6","namespaceId":"default","templateName":"Azure
-        Create disk storage","templateCategory":"userCreated","templateProvider":"Other","template_type":"Terraform","applied_state_id":"5e1888c3a2d364001dab98f9","latest_state_id":"5e1888c3a2d364001dab98f9","cloud_connection_ids":["5d2f602ec068e4001c9bfb9e"],"stackRelease":"v2","lastUpdatedAt":"2020-01-10T14:23:21.357Z","id":"5e1888c3a2d364001dab98f8","tenantId":"f58e4d39-ac01-40fb-b259-88cd9a33f8e8","action":"CREATE","message":"Fri
-        Jan 10 2020 14:23:02 GMT+0000 (UTC) Running terraform init ... ","status":"SUCCESS","applied_action":"CREATE","applied_output_datatype":"","applied_status":"SUCCESS","stack_id":"b4ecf760-33b4-11ea-806d-41dadd4e9b0e"},{"name":"enablement_demo","created_at":"2020-01-21T13:59:24.933Z","templateId":"5e1887e5a2d364001dab98f6","namespaceId":"default","templateName":"Azure
-        Create disk storage","templateCategory":"userCreated","templateProvider":"Other","template_type":"Terraform","applied_state_id":"5e2703bd8a7926001dff2eae","latest_state_id":"5e2703bd8a7926001dff2eae","cloud_connection_ids":["5d2f602ec068e4001c9bfb9e"],"stackRelease":"v2","lastUpdatedAt":"2020-01-21T13:59:49.142Z","id":"5e2703bc8a7926001dff2ead","tenantId":"f58e4d39-ac01-40fb-b259-88cd9a33f8e8","action":"CREATE","message":"Tue
-        Jan 21 2020 13:59:30 GMT+0000 (UTC) Running terraform init ... ","status":"FAILED","applied_action":"CREATE","applied_output_datatype":"","applied_status":"FAILED","stack_id":"3dbf9080-3c56-11ea-b1a6-c3ec78a3dfe8"}]'
+      string: '[ { "type": "virtual_machine", "name": "aws_instance.orpheus_ubuntu_micro", "stackId": "5eac8d41ed4fa000171eaa1b", "provider": "Amazon EC2", "idFromProvider": "i-0361c15366e550109", "typeFromProvider": "aws_instance", "module_path": [ "root" ], "consolelinks": [ "https://console.aws.amazon.com/ec2/v2/home" ], "ipaddresses": [ "172.88.10.15" ], "tainted": false, "tenantId": "f58e4d39-ac01-40fb-b259-88cd9a33f8e8", "namespaceId": "eks-cluster-13", "namespaceMapping": true, "id": "5eac8d80ed4fa000171eaa23" }, { "type": "virtual_machine", "name": "aws_instance.db-server", "stackId": "5ee8dd8b6143d40017c2ee3c", "provider": "Amazon EC2", "idFromProvider": "i-01d992f6d1f8c04aa", "typeFromProvider": "aws_instance", "module_path": [ "root" ], "consolelinks": [ "https://console.aws.amazon.com/ec2/v2/home" ], "ipaddresses": [ "18.212.88.88", "172.31.10.88" ], "tainted": false, "tenantId": "f58e4d39-ac01-40fb-b259-88cd9a33f8e8", "namespaceId": "acme", "namespaceMapping": true, "id": "5ee8ddde6143d40017c2ee44" } ]'
     http_version: null
   recorded_at: Wed, 04 Mar 2020 16:29:38 GMT
 recorded_with: VCR 5.1.0
