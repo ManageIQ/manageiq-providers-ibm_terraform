@@ -263,7 +263,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:38 GMT
 - request:
     method: get
-    uri: https://cam_url/cam/api/v1/iaasresources?filter={%22where%22:%20{%22type%22:%20%20%22virtual_machine%22}}&ace_orgGuid=all&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    uri: https://cam_url/cam/api/v1/iaasresources?ace_orgGuid=all&filter=%7B%22where%22:%20%7B%22type%22:%20%22virtual_machine%22%7D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
     body:
       encoding: US-ASCII
       string: ''
