@@ -40,11 +40,15 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
   # }]
   def configured_systems
     collector.virtual_machines.each do |virtual_machine|
+      virtual_instance_ref = virtual_machine["idFromProvider"]
+      counterpart          = persister.vms.lazy_find(virtual_instance_ref) if virtual_instance_ref
+
       persister.configured_systems.build(
         :manager_ref          => virtual_machine["id"].to_s,
         :name                 => virtual_machine["name"],
         :ipaddress            => virtual_machine["ipaddresses"]&.first,
-        :virtual_instance_ref => virtual_machine["idFromProvider"]
+        :virtual_instance_ref => virtual_instance_ref,
+        :counterpart          => counterpart
       )
     end
   end

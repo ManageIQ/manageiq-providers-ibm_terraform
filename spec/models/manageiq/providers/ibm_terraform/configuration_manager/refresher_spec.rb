@@ -4,6 +4,8 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
   end
 
   context "#refresh" do
+    let!(:cross_link_vm) { FactoryBot.create(:vm, :ems_ref => "i-0361c15366e550109", :uid_ems => "i-0361c15366e550109") }
+
     let(:provider) do
       url = Rails.application.secrets.cam.try(:[], :url) || 'cam_url'
       identity_url = Rails.application.secrets.cam.try(:[], :identity_url) || 'identity_url'
@@ -51,6 +53,8 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
         :type     => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem",
         :hostname => "aws_instance.orpheus_ubuntu_micro"
       )
+
+      expect(configured_system.counterpart).to eq(cross_link_vm)
     end
   end
 end
