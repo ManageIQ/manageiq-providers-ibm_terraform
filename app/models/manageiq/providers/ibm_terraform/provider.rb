@@ -33,33 +33,38 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
         {
           :component => 'sub-form',
           :name      => 'endpoints-subform',
+          :id        => 'endpoints-subform',
           :title     => _("Endpoint"),
           :fields    => [
             {
               :component              => 'validate-provider-credentials',
               :name                   => 'authentications.default.valid',
+              :id                     => 'authentications.default.valid',
               :skipSubmit             => true,
               :validationDependencies => %w[type zone_id],
               :fields                 => [
                 {
                   :component  => "text-field",
                   :name       => "endpoints.default.url",
+                  :id         => "endpoints.default.url",
                   :label      => _("Managed Services URL"),
                   :helperText => _("Managed Services URL. e.g. https://cam.apps.mydomain.com"),
                   :isRequired => true,
-                  :validate   => [{:type => "required-validator"}]
+                  :validate   => [{:type => "required"}]
                 },
                 {
                   :component  => "text-field",
                   :name       => "endpoints.identity.url",
+                  :id         => "endpoints.identity.url",
                   :label      => _("CloudPak for MCM URL"),
                   :helperText => _("CloudPak for MCM URL. e.g. https://cp-console.apps.mydomain.com"),
                   :isRequired => true,
-                  :validate   => [{:type => "required-validator"}]
+                  :validate   => [{:type => "required"}]
                 },
                 {
-                  :component    => "select-field",
+                  :component    => "select",
                   :name         => "endpoints.default.verify_ssl",
+                  :id           => "endpoints.default.verify_ssl",
                   :label        => _("SSL verification"),
                   :isRequired   => true,
                   :initialValue => OpenSSL::SSL::VERIFY_PEER,
@@ -77,18 +82,20 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
                 {
                   :component  => "text-field",
                   :name       => "authentications.default.userid",
+                  :id         => "authentications.default.userid",
                   :label      => _("Username"),
                   :helperText => _("Should have privileged access, such as administrator."),
                   :isRequired => true,
-                  :validate   => [{:type => "required-validator"}]
+                  :validate   => [{:type => "required"}]
                 },
                 {
                   :component  => "password-field",
                   :name       => "authentications.default.password",
+                  :id         => "authentications.default.password",
                   :label      => _("Password"),
                   :type       => "password",
                   :isRequired => true,
-                  :validate   => [{:type => "required-validator"}]
+                  :validate   => [{:type => "required"}]
                 },
               ],
             },
