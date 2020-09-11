@@ -11,7 +11,7 @@ module ManageIQ
         end
 
         def self.plugin_name
-          _('ManageIQ Providers IBM Terraform')
+          _('IBM Terraform Provider')
         end
       end
     end
