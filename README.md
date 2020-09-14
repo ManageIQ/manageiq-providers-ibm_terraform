@@ -1,17 +1,17 @@
 # ManageIQ::Providers::IbmTerraform
 
 [![Build Status](https://travis-ci.com/ManageIQ/manageiq-providers-ibm_terraform.svg?branch=master)](https://travis-ci.com/ManageIQ/manageiq-providers-ibm_terraform)
-[![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform)
-[![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9ee8df54b708c3223c78/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9ee8df54b708c3223c78/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/test_coverage)
 [![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-ibm_terraform/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-ibm_terraform/master)
 
 [![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-ibm_terraform?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-IBM Terraform plugin for ManageIQ
+ManageIQ plugin for the Ibm Terraform provider.
 
 ## Development
 
-See the section on plugins in the [ManageIQ Developer Setup](https://github.com/ManageIQ/guides/blob/master/developer_setup/plugins.md)
+See the section on plugins in the [ManageIQ Developer Setup](http://manageiq.org/docs/guides/developer_setup/plugins)
 
 For quick local setup run `bin/setup`, which will clone the core ManageIQ repository under the *spec* directory and setup necessary config files. If you have already cloned it, you can run `bin/update` to bring the core ManageIQ code up to date.
 
