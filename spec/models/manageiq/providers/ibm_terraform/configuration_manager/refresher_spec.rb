@@ -41,9 +41,10 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
     def assert_specific_configuration_profile
       configuration_profile = ems.configuration_profiles.find_by(:manager_ref => "5d2f6030c068e4001c9bfbb7")
       expect(configuration_profile).to have_attributes(
-        :type        => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfigurationProfile",
-        :name        => "LAMP stack deployment on AWS",
-        :description => "LAMP - A fully-integrated environment for full stack PHP web development.",
+        :type            => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfigurationProfile",
+        :name            => "LAMP stack deployment on AWS",
+        :description     => "LAMP - A fully-integrated environment for full stack PHP web development.",
+        :target_platform => "Amazon EC2"
       )
     end
 

@@ -7,9 +7,10 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
   def configuration_profiles
     collector.templates.each do |template|
       persister.configuration_profiles.build(
-        :manager_ref => template["id"].to_s,
-        :name        => template["name"],
-        :description => template["description"]
+        :manager_ref     => template["id"].to_s,
+        :name            => template["name"],
+        :description     => template["description"],
+        :target_platform => template.dig("manifest", "template_provider")
       )
     end
   end
