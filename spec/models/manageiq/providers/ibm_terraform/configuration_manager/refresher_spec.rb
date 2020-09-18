@@ -4,20 +4,28 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
   end
 
   context "#refresh" do
+    before { EvmSpecHelper.create_guid_miq_server_zone }
+
     let!(:cross_link_vm) { FactoryBot.create(:vm, :ems_ref => "i-0361c15366e550109", :uid_ems => "i-0361c15366e550109") }
 
-    let(:provider) do
+    let(:zone) { FactoryBot.create(:zone) }
+    let(:params) { {:name => "IbmTerraform for test", :zone_id => zone.id} }
+    let(:endpoints) do
       url = Rails.application.secrets.cam.try(:[], :url) || 'cam_url'
       identity_url = Rails.application.secrets.cam.try(:[], :identity_url) || 'identity_url'
-      FactoryBot.create(:provider_ibm_terraform, :url => "https://#{url}", :identity_url => "https://#{identity_url}").tap do |p|
-        userid   = Rails.application.secrets.cam.try(:[], :user) || 'CAM_USER'
-        password = Rails.application.secrets.cam.try(:[], :password) || 'CAM_PASSWORD'
-
-        p.update_authentication(:default => {:userid => userid, :password => password})
-      end
+      [
+        {"role" => "default", "url" => "https://#{url}", "verify_ssl" => 0},
+        {"role" => "identity", "url" => "https://#{identity_url}", "verify_ssl" => 0},
+      ]
+    end
+    let(:authentications) do
+      userid   = Rails.application.secrets.cam.try(:[], :user) || 'CAM_USER'
+      password = Rails.application.secrets.cam.try(:[], :password) || 'CAM_PASSWORD'
+      [{"authtype" => "default", "userid" => userid, "password" => password}]
     end
 
-    let(:ems) { provider.configuration_manager }
+    let(:ems) { ManageIQ::Providers::IbmTerraform::ConfigurationManager.create_from_params(params, endpoints, authentications) }
+    let(:provider) { ems.provider }
 
     it "will perform a full refresh" do
       2.times do
