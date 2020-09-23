@@ -36,8 +36,8 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
         ems.reload
 
         assert_ems_counts
-        assert_specific_configuration_profile
-        assert_specific_configured_system
+        configuration_profile_id = assert_specific_configuration_profile
+        assert_specific_configured_system(configuration_profile_id)
       end
     end
 
@@ -54,13 +54,15 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
         :description     => "LAMP - A fully-integrated environment for full stack PHP web development.",
         :target_platform => "Amazon EC2"
       )
+      configuration_profile.id
     end
 
-    def assert_specific_configured_system
+    def assert_specific_configured_system(configuration_profile_id)
       configured_system = ems.configured_systems.find_by(:manager_ref => "5eac8d80ed4fa000171eaa23")
       expect(configured_system).to have_attributes(
-        :type     => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem",
-        :hostname => "aws_instance.orpheus_ubuntu_micro"
+        :type                     => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem",
+        :hostname                 => "aws_instance.orpheus_ubuntu_micro",
+        :configuration_profile_id => configuration_profile_id
       )
 
       expect(configured_system.counterpart).to eq(cross_link_vm)

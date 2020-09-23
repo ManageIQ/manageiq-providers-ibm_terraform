@@ -33,6 +33,9 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
   #         "18.215.xxx.yyy",
   #         "172.31.xx.yy"
   #     ],
+  #     "stacks": {
+  #         "templateId": "5ee8ddde6143d40017c2ee46"
+  #     },
   #     "tainted": false,
   #     "tenantId": "fbb9ab6a-b54d-43d4-9200-6d950700588f",
   #     "namespaceId": "acme",
@@ -41,15 +44,18 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
   # }]
   def configured_systems
     collector.virtual_machines.each do |virtual_machine|
-      virtual_instance_ref = virtual_machine["idFromProvider"]
-      counterpart          = persister.vms.lazy_find(virtual_instance_ref) if virtual_instance_ref
+      virtual_instance_ref  = virtual_machine["idFromProvider"]
+      counterpart           = persister.vms.lazy_find(virtual_instance_ref) if virtual_instance_ref
+      template_id           = virtual_machine.dig("stacks", "templateId")
+      configuration_profile = persister.configuration_profiles.lazy_find(template_id.to_s) if template_id
 
       persister.configured_systems.build(
-        :manager_ref          => virtual_machine["id"].to_s,
-        :name                 => virtual_machine["name"],
-        :ipaddress            => virtual_machine["ipaddresses"]&.first,
-        :virtual_instance_ref => virtual_instance_ref,
-        :counterpart          => counterpart
+        :manager_ref           => virtual_machine["id"].to_s,
+        :name                  => virtual_machine["name"],
+        :ipaddress             => virtual_machine["ipaddresses"]&.first,
+        :virtual_instance_ref  => virtual_instance_ref,
+        :counterpart           => counterpart,
+        :configuration_profile => configuration_profile
       )
     end
   end

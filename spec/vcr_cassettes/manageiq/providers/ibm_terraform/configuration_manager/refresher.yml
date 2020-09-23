@@ -191,7 +191,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:36 GMT
 - request:
     method: get
-    uri: https://cam_url/cam/api/v1/iaasresources?ace_orgGuid=all&filter=%7B%22where%22:%20%7B%22type%22:%20%22virtual_machine%22%7D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    uri: https://cam_url/cam/api/v1/iaasresources?ace_orgGuid=all&filter=%7B%22where%22:%20%7B%22type%22:%20%22virtual_machine%22%7D,%20%22include%22:%20%7B%22relation%22:%20%22stacks%22%7D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
     body:
       encoding: US-ASCII
       string: ''
@@ -254,7 +254,7 @@ http_interactions:
       - Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With
     body:
       encoding: ASCII-8BIT
-      string: '[ { "type": "virtual_machine", "name": "aws_instance.orpheus_ubuntu_micro", "stackId": "5eac8d41ed4fa000171eaa1b", "provider": "Amazon EC2", "idFromProvider": "i-0361c15366e550109", "typeFromProvider": "aws_instance", "module_path": [ "root" ], "consolelinks": [ "https://console.aws.amazon.com/ec2/v2/home" ], "ipaddresses": [ "172.88.10.15" ], "tainted": false, "tenantId": "f58e4d39-ac01-40fb-b259-88cd9a33f8e8", "namespaceId": "eks-cluster-13", "namespaceMapping": true, "id": "5eac8d80ed4fa000171eaa23" }, { "type": "virtual_machine", "name": "aws_instance.db-server", "stackId": "5ee8dd8b6143d40017c2ee3c", "provider": "Amazon EC2", "idFromProvider": "i-01d992f6d1f8c04aa", "typeFromProvider": "aws_instance", "module_path": [ "root" ], "consolelinks": [ "https://console.aws.amazon.com/ec2/v2/home" ], "ipaddresses": [ "18.212.88.88", "172.31.10.88" ], "tainted": false, "tenantId": "f58e4d39-ac01-40fb-b259-88cd9a33f8e8", "namespaceId": "acme", "namespaceMapping": true, "id": "5ee8ddde6143d40017c2ee44" } ]'
+      string: '[ { "type": "virtual_machine", "name": "aws_instance.orpheus_ubuntu_micro", "stackId": "5eac8d41ed4fa000171eaa1b", "provider": "Amazon EC2", "idFromProvider": "i-0361c15366e550109", "typeFromProvider": "aws_instance", "module_path": [ "root" ], "consolelinks": [ "https://console.aws.amazon.com/ec2/v2/home" ], "ipaddresses": [ "172.88.10.15" ], "tainted": false, "tenantId": "f58e4d39-ac01-40fb-b259-88cd9a33f8e8", "namespaceId": "eks-cluster-13", "namespaceMapping": true, "id": "5eac8d80ed4fa000171eaa23", "stacks": { "templateId": "5d2f6030c068e4001c9bfbb7" } }, { "type": "virtual_machine", "name": "aws_instance.db-server", "stackId": "5ee8dd8b6143d40017c2ee3c", "provider": "Amazon EC2", "idFromProvider": "i-01d992f6d1f8c04aa", "typeFromProvider": "aws_instance", "module_path": [ "root" ], "consolelinks": [ "https://console.aws.amazon.com/ec2/v2/home" ], "ipaddresses": [ "18.212.88.88", "172.31.10.88" ], "tainted": false, "tenantId": "f58e4d39-ac01-40fb-b259-88cd9a33f8e8", "namespaceId": "acme", "namespaceMapping": true, "id": "5ee8ddde6143d40017c2ee44" } ]'
     http_version: null
   recorded_at: Wed, 04 Mar 2020 16:29:38 GMT
 recorded_with: VCR 5.1.0
