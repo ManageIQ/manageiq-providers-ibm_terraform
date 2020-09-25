@@ -53,6 +53,7 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
         :manager_ref           => virtual_machine["id"].to_s,
         :name                  => virtual_machine["name"],
         :ipaddress             => virtual_machine["ipaddresses"]&.first,
+        :vendor                => virtual_machine["provider"],
         :virtual_instance_ref  => virtual_instance_ref,
         :counterpart           => counterpart,
         :configuration_profile => configuration_profile
