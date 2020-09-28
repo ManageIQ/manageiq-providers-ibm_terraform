@@ -41,6 +41,7 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
               :name                   => 'authentications.default.valid',
               :id                     => 'authentications.default.valid',
               :skipSubmit             => true,
+              :isRequired             => true,
               :validationDependencies => %w[type zone_id],
               :fields                 => [
                 {
