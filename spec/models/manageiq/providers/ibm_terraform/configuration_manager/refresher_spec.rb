@@ -10,8 +10,8 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
 
     let(:zone) { FactoryBot.create(:zone) }
     let(:params) { {:name => "IbmTerraform for test", :zone_id => zone.id} }
+    let(:url) { Rails.application.secrets.cam.try(:[], :url) || 'cam_url' }
     let(:endpoints) do
-      url = Rails.application.secrets.cam.try(:[], :url) || 'cam_url'
       identity_url = Rails.application.secrets.cam.try(:[], :identity_url) || 'identity_url'
       [
         {"role" => "default", "url" => "https://#{url}", "verify_ssl" => 0},
@@ -49,10 +49,12 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
     def assert_specific_configuration_profile
       configuration_profile = ems.configuration_profiles.find_by(:manager_ref => "5d2f6030c068e4001c9bfbb7")
       expect(configuration_profile).to have_attributes(
-        :type            => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfigurationProfile",
-        :name            => "LAMP stack deployment on AWS",
-        :description     => "LAMP - A fully-integrated environment for full stack PHP web development.",
-        :target_platform => "Amazon EC2"
+        :type              => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfigurationProfile",
+        :name              => "LAMP stack deployment on AWS",
+        :description       => "LAMP - A fully-integrated environment for full stack PHP web development.",
+        :target_platform   => "Amazon EC2",
+        :supports_console? => true,
+        :console_url       => "https://#{url}/templates/#!/templatedetails/5d2f6030c068e4001c9bfbb7"
       )
       configuration_profile.id
     end
