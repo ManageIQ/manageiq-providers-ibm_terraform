@@ -130,7 +130,7 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
     verify_mode = args.dig("endpoints", "default", "verify_ssl")
 
     userid   = default_authentication["userid"]
-    password = MiqPassword.try_decrypt(default_authentication["password"])
+    password = ManageIQ::Password.try_decrypt(default_authentication["password"])
 
     !!raw_connect(identity_url, userid, password, verify_mode)
   end
