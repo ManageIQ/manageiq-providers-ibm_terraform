@@ -36,6 +36,9 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
   #     "stacks": {
   #         "templateId": "5ee8ddde6143d40017c2ee46"
   #     },
+  #     "details": {
+  #         "name": "demoinstance"
+  #     },
   #     "tainted": false,
   #     "tenantId": "fbb9ab6a-b54d-43d4-9200-6d950700588f",
   #     "namespaceId": "acme",
@@ -51,13 +54,26 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
 
       persister.configured_systems.build(
         :manager_ref           => virtual_machine["id"].to_s,
-        :name                  => virtual_machine["name"],
+        :name                  => get_hostname(virtual_machine),
         :ipaddress             => virtual_machine["ipaddresses"]&.first,
         :vendor                => virtual_machine["provider"],
         :virtual_instance_ref  => virtual_instance_ref,
         :counterpart           => counterpart,
         :configuration_profile => configuration_profile
       )
+    end
+  end
+
+  private
+
+  def get_hostname(virtual_machine)
+    vm_provider = virtual_machine["provider"]
+    if vm_provider == "Amazon EC2"
+      virtual_machine.dig("details", "tags.Name")
+    elsif vm_provider == "IBM"
+      virtual_machine.dig("details", "hostname")
+    else
+      virtual_machine.dig("details", "name")
     end
   end
 end

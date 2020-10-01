@@ -63,7 +63,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
       configured_system = ems.configured_systems.find_by(:manager_ref => "5eac8d80ed4fa000171eaa23")
       expect(configured_system).to have_attributes(
         :type                     => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem",
-        :hostname                 => "aws_instance.orpheus_ubuntu_micro",
+        :hostname                 => "demoinstance",
         :vendor                   => "Amazon EC2",
         :configuration_profile_id => configuration_profile_id
       )
