@@ -3,6 +3,6 @@ class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfigurationProf
 
   def console_url
     base_url = provider.default_endpoint.url
-    "#{base_url}/templates/#!/templatedetails/#{manager_ref}"
+    "#{base_url}/cam/templates/#!/templatedetails/#{manager_ref}"
   end
 end
