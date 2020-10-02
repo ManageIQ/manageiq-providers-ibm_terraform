@@ -54,7 +54,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
         :description       => "LAMP - A fully-integrated environment for full stack PHP web development.",
         :target_platform   => "Amazon EC2",
         :supports_console? => true,
-        :console_url       => "https://#{url}/templates/#!/templatedetails/5d2f6030c068e4001c9bfbb7"
+        :console_url       => "https://#{url}/cam/templates/#!/templatedetails/5d2f6030c068e4001c9bfbb7"
       )
       configuration_profile.id
     end
