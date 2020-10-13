@@ -37,7 +37,8 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
 
         assert_ems_counts
         configuration_profile_id = assert_specific_configuration_profile
-        assert_specific_configured_system(configuration_profile_id)
+        orchestration_stack_id = assert_specific_orchestration_stack
+        assert_specific_configured_system(configuration_profile_id, orchestration_stack_id)
       end
     end
 
@@ -59,13 +60,26 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
       configuration_profile.id
     end
 
-    def assert_specific_configured_system(configuration_profile_id)
+    def assert_specific_orchestration_stack
+      orchestration_stack = ems.orchestration_stacks.find_by(:ems_ref => "5eac8d41ed4fa000171eaa1b")
+      expect(orchestration_stack).to have_attributes(
+        :type        => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::OrchestrationStack",
+        :name        => "nodejs",
+        :description => "Node.js on a Single VM on AWS"
+      )
+      orchestration_stack.id
+    end
+
+    def assert_specific_configured_system(configuration_profile_id, orchestration_stack_id)
       configured_system = ems.configured_systems.find_by(:manager_ref => "5eac8d80ed4fa000171eaa23")
       expect(configured_system).to have_attributes(
         :type                     => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem",
         :hostname                 => "demoinstance",
         :vendor                   => "Amazon EC2",
-        :configuration_profile_id => configuration_profile_id
+        :configuration_profile_id => configuration_profile_id,
+        :orchestration_stack_id   => orchestration_stack_id,
+        :supports_console?        => true,
+        :console_url              => "https://#{url}/cam/instances/#!/instanceDetails/5eac8d41ed4fa000171eaa1b"
       )
 
       expect(configured_system.counterpart).to eq(cross_link_vm)
