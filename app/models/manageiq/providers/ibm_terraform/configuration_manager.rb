@@ -1,6 +1,7 @@
 class ManageIQ::Providers::IbmTerraform::ConfigurationManager < ManageIQ::Providers::ConfigurationManager
   require_nested :ConfigurationProfile
   require_nested :ConfiguredSystem
+  require_nested :OrchestrationStack
   require_nested :Refresher
   require_nested :RefreshWorker
 
@@ -21,6 +22,8 @@ class ManageIQ::Providers::IbmTerraform::ConfigurationManager < ManageIQ::Provid
            :to => :provider
 
   belongs_to :provider, :autosave => true, :dependent => :destroy
+
+  has_many :orchestration_stacks, :dependent => :destroy, :foreign_key => "ems_id"
 
   class << self
     delegate :params_for_create,

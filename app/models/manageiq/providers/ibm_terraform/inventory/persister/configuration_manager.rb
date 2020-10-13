@@ -2,6 +2,7 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Persister::ConfigurationMana
   def initialize_inventory_collections
     add_collection(configuration, :configuration_profiles)
     add_collection(configuration, :configured_systems)
+    add_collection(configuration, :orchestration_stacks)
 
     add_cross_provider_vms
   end

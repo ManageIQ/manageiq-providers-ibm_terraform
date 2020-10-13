@@ -22,8 +22,22 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Collector::ConfigurationMana
         "tenantId"    => tenant_id,
         "ace_orgGuid" => "all"
       )
-
       response = redirect_cam_api(iaas_resource_virtual_machine_uri)
+      JSON.parse(response.body)
+    end
+  end
+
+  def stacks
+    @stacks ||= begin
+      stack_uri = URI.parse(manager.url)
+      stack_uri.path = "/cam/api/v1/stacks"
+      filter = '{"fields": ["id", "name", "templateId", "templateName", "status", "templateProvider", "created_at", "lastUpdatedAt"]}'
+      stack_uri.query = URI.encode_www_form(
+        "filter"      => filter,
+        "tenantId"    => tenant_id,
+        "ace_orgGuid" => "all"
+      )
+      response = redirect_cam_api(stack_uri)
       JSON.parse(response.body)
     end
   end

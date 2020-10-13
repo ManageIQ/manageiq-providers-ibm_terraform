@@ -1,6 +1,7 @@
 class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager < ManageIQ::Providers::IbmTerraform::Inventory::Parser
   def parse
     configuration_profiles
+    orchestration_stacks
     configured_systems
   end
 
@@ -11,6 +12,19 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
         :name            => template["name"],
         :description     => template["description"],
         :target_platform => template.dig("manifest", "template_provider")
+      )
+    end
+  end
+
+  def orchestration_stacks
+    collector.stacks.each do |stack|
+      persister.orchestration_stacks.build(
+        :ems_ref     => stack["id"].to_s,
+        :name        => stack["name"],
+        :description => stack["templateName"],
+        :status      => stack["status"],
+        :created_at  => stack["created_at"],
+        :updated_at  => stack["lastUpdatedAt"]
       )
     end
   end
@@ -51,6 +65,8 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
       counterpart           = persister.vms.lazy_find(virtual_instance_ref) if virtual_instance_ref
       template_id           = virtual_machine.dig("stacks", "templateId")
       configuration_profile = persister.configuration_profiles.lazy_find(template_id.to_s) if template_id
+      stack_id              = virtual_machine["stackId"]
+      orchestration_stack   = persister.orchestration_stacks.lazy_find(stack_id.to_s) if stack_id
 
       persister.configured_systems.build(
         :manager_ref           => virtual_machine["id"].to_s,
@@ -59,7 +75,8 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
         :vendor                => virtual_machine["provider"],
         :virtual_instance_ref  => virtual_instance_ref,
         :counterpart           => counterpart,
-        :configuration_profile => configuration_profile
+        :configuration_profile => configuration_profile,
+        :orchestration_stack   => orchestration_stack
       )
     end
   end
