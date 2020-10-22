@@ -1,4 +1,5 @@
 class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem < ::ConfiguredSystem
+  include SupportsFeatureMixin
   supports :console
 
   include ProviderObjectMixin

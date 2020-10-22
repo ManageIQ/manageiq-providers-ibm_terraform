@@ -1,4 +1,5 @@
 class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfigurationProfile < ::ConfigurationProfile
+  include SupportsFeatureMixin
   supports :console
 
   def console_url
