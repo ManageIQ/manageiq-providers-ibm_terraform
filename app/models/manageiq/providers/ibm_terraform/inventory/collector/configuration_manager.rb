@@ -3,7 +3,13 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Collector::ConfigurationMana
     @templates ||= begin
       template_uri = URI.parse(manager.url)
       template_uri.path = "/cam/api/v1/templates"
-      template_uri.query = URI.encode_www_form("tenantId" => tenant_id, "ace_orgGuid" => "all")
+
+      filter = '{"where": {"type": {"neq": "ContentRuntime"}}}'
+      template_uri.query = URI.encode_www_form(
+        "filter"      => filter,
+        "tenantId"    => tenant_id,
+        "ace_orgGuid" => "all"
+      )
       response = redirect_cam_api(template_uri)
       JSON.parse(response.body)
     end
