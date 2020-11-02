@@ -122,7 +122,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:36 GMT
 - request:
     method: get
-    uri: https://cam_url/cam/api/v1/templates?ace_orgGuid=all&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    uri: https://cam_url/cam/api/v1/templates?ace_orgGuid=all&filter=%7B%22where%22:%20%7B%22type%22:%20%7B%22neq%22:%20%22ContentRuntime%22%7D%7D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
     body:
       encoding: US-ASCII
       string: ''
