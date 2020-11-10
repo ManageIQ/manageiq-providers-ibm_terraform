@@ -3,6 +3,9 @@
     :blacklisted_event_names: []
     :event_handling:
       :event_groups:
+:ems_refresh:
+  :ibm_terraform:
+    :refresh_interval: 15.minutes
 :http_proxy:
   :ibm_terraform:
     :host:
