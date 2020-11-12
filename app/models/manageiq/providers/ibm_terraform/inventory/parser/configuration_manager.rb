@@ -61,8 +61,8 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
   # }]
   def configured_systems
     collector.virtual_machines.each do |virtual_machine|
-      virtual_instance_ref  = virtual_machine["idFromProvider"]
-      counterpart           = persister.vms.lazy_find(virtual_instance_ref) if virtual_instance_ref
+      virtual_instance_ref  = get_virtual_instance_ref(virtual_machine)
+      counterpart           = find_counterpart_vm(virtual_machine["provider"], virtual_instance_ref)
       template_id           = virtual_machine.dig("stacks", "templateId")
       configuration_profile = persister.configuration_profiles.lazy_find(template_id.to_s) if template_id
       stack_id              = virtual_machine["stackId"]
@@ -91,6 +91,31 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
       virtual_machine.dig("details", "hostname")
     else
       virtual_machine.dig("details", "name")
+    end
+  end
+
+  def find_counterpart_vm(vm_provider, virtual_instance_ref)
+    return nil if virtual_instance_ref.nil?
+
+    if vm_provider == "Microsoft Azure"
+      persister.vms.lazy_find({:ems_ref => virtual_instance_ref}, {:ref => :by_ems_ref})
+    else
+      persister.vms.lazy_find({:uid_ems => virtual_instance_ref}, {:ref => :by_uid_ems})
+    end
+  end
+
+  # The Azure virtual instance reference(from Terrafrom) will be modified to match the format used by Azure Provider.
+  # INPUT: /subscriptions/0e0a4200-8719-4849-bb0b-abcde/resourceGroups/virtualmachine-tm-071b00e5-rg/providers/Microsoft.Compute/virtualMachines/virtualmachine-tm-vm
+  # OUTPUT: 0e0a4200-8719-4849-bb0b-abcde/virtualmachine-tm-071b00e5-rg/microsoft.compute/virtualmachines/virtualmachine-tm-vm
+  def get_virtual_instance_ref(virtual_machine)
+    virtual_instance_ref = virtual_machine["idFromProvider"]
+    return nil if virtual_instance_ref.nil?
+
+    vm_provider = virtual_machine["provider"]
+    if vm_provider == "Microsoft Azure"
+      virtual_instance_ref.downcase.gsub(/\/subscriptions\/|\/resourcegroups\b|\/providers\b/, '')
+    else
+      virtual_instance_ref
     end
   end
 end

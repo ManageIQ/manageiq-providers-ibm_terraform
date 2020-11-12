@@ -10,10 +10,10 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Persister::ConfigurationMana
   def add_cross_provider_vms
     add_collection(configuration, :vms) do |builder|
       builder.add_properties(
-        :parent      => nil,
-        :arel        => Vm,
-        :strategy    => :local_db_find_references,
-        :manager_ref => %i[uid_ems]
+        :parent         => nil,
+        :arel           => Vm,
+        :strategy       => :local_db_find_references,
+        :secondary_refs => {:by_uid_ems => %i[uid_ems], :by_ems_ref => %i[ems_ref]}
       )
     end
   end
