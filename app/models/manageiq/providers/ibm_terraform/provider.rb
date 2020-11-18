@@ -28,7 +28,7 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
   end
 
   def self.params_for_create
-    @params_for_create ||= {
+    {
       :fields => [
         {
           :component => 'sub-form',
@@ -103,7 +103,7 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
           ],
         },
       ]
-    }.freeze
+    }
   end
 
   # Verify Credentials
