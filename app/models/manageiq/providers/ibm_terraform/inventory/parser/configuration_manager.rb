@@ -86,7 +86,7 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
   def get_hostname(virtual_machine)
     vm_provider = virtual_machine["provider"]
     if vm_provider == "Amazon EC2"
-      virtual_machine.dig("details", "tags.Name")
+      virtual_machine.dig("details", "tags.Name") || virtual_machine.dig("details", "tags", "Name")
     elsif vm_provider == "IBM"
       virtual_machine.dig("details", "hostname")
     else
