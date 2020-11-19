@@ -41,6 +41,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
         configuration_profile_id = assert_specific_configuration_profile
         orchestration_stack_id = assert_specific_orchestration_stack
         assert_specific_aws_configured_system(configuration_profile_id, orchestration_stack_id)
+        assert_aws_configured_system_hostname_with_multiple_tags
         assert_specific_azure_configured_system
         assert_specific_vmware_configured_system
       end
@@ -48,7 +49,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
 
     def assert_ems_counts
       expect(ems.configuration_profiles.count).to eq(169)
-      expect(ems.configured_systems.count).to     eq(4)
+      expect(ems.configured_systems.count).to     eq(5)
     end
 
     def assert_specific_configuration_profile
@@ -87,6 +88,15 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
       )
 
       expect(aws_configured_system.counterpart).to eq(cross_link_aws_vm)
+    end
+
+    def assert_aws_configured_system_hostname_with_multiple_tags
+      aws_configured_system = ems.configured_systems.find_by(:manager_ref => "5fb677b9ae457000181dd463")
+      expect(aws_configured_system).to have_attributes(
+        :type     => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem",
+        :hostname => "agostino-hybrid-1",
+        :vendor   => "Amazon EC2"
+      )
     end
 
     def assert_specific_azure_configured_system
