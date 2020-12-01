@@ -4,7 +4,7 @@
     :event_handling:
       :event_groups:
 :ems_refresh:
-  :ibm_terraform:
+  :ibm_terraform_configuration:
     :refresh_interval: 15.minutes
 :http_proxy:
   :ibm_terraform:
