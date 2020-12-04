@@ -88,7 +88,7 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
     if vm_provider == "Amazon EC2"
       virtual_machine.dig("details", "tags.Name")
     elsif vm_provider == "IBM"
-      virtual_machine.dig("details", "hostname")
+      virtual_machine.dig("details", "hostname") || virtual_machine.dig("details", "name")
     else
       virtual_machine.dig("details", "name")
     end
