@@ -44,12 +44,13 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
         assert_aws_configured_system_hostname_with_multiple_tags
         assert_specific_azure_configured_system
         assert_specific_vmware_configured_system
+        assert_specific_ibm_vpc_configured_system
       end
     end
 
     def assert_ems_counts
       expect(ems.configuration_profiles.count).to eq(169)
-      expect(ems.configured_systems.count).to     eq(5)
+      expect(ems.configured_systems.count).to     eq(6)
     end
 
     def assert_specific_configuration_profile
@@ -119,6 +120,16 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
       )
 
       expect(vmware_configured_system.counterpart).to eq(cross_link_vmware_vm)
+    end
+
+    def assert_specific_ibm_vpc_configured_system
+      ibm_configured_system = ems.configured_systems.find_by(:manager_ref => "5fc7b3070300a80018e3c192")
+      expect(ibm_configured_system).to have_attributes(
+        :type                 => "ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem",
+        :hostname             => "web-server-vsi",
+        :vendor               => "IBM",
+        :virtual_instance_ref => "0757_099e516f-f489-455b-a459-10b73d50d04d"
+      )
     end
   end
 end
