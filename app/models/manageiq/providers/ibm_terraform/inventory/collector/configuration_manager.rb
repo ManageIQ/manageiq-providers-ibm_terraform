@@ -21,7 +21,7 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Collector::ConfigurationMana
       iaas_resource_virtual_machine_uri.path = "/cam/api/v1/iaasresources"
 
       filter = '{"where": {"type": "virtual_machine"},'\
-                '"fields": ["id", "name", "type", "idFromProvider", "stackId", "details", "ipaddresses", "provider"],'\
+                '"fields": ["id", "name", "type", "idFromProvider", "stackId", "specifications", "details", "ipaddresses", "provider"],'\
                 '"include": {"relation": "stacks", "scope": {"fields": ["templateId"]}}}'
       iaas_resource_virtual_machine_uri.query = URI.encode_www_form(
         "filter"      => filter,
