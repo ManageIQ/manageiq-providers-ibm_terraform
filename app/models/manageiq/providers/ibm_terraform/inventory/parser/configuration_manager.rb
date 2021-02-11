@@ -68,7 +68,7 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
       stack_id              = virtual_machine["stackId"]
       orchestration_stack   = persister.orchestration_stacks.lazy_find(stack_id.to_s) if stack_id
 
-      persister.configured_systems.build(
+      configured_system = persister.configured_systems.build(
         :manager_ref           => virtual_machine["id"].to_s,
         :name                  => get_hostname(virtual_machine),
         :ipaddress             => virtual_machine["ipaddresses"]&.first,
@@ -77,6 +77,20 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
         :counterpart           => counterpart,
         :configuration_profile => configuration_profile,
         :orchestration_stack   => orchestration_stack
+      )
+
+      num_cpus     = virtual_machine.dig("specifications", "num_cpus")
+      memory_in_mb = virtual_machine.dig("specifications", "memory")
+      next if num_cpus.nil? && memory_in_mb.nil?
+
+      computer_system = persister.computer_systems.build(
+        :managed_entity => configured_system
+      )
+
+      persister.hardwares.build(
+        :computer_system => computer_system,
+        :cpu_total_cores => num_cpus,
+        :memory_mb       => memory_in_mb
       )
     end
   end
@@ -89,6 +103,8 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
       virtual_machine.dig("details", "tags.Name") || virtual_machine.dig("details", "tags", "Name")
     elsif vm_provider == "IBM"
       virtual_machine.dig("details", "hostname") || virtual_machine.dig("details", "name")
+    elsif vm_provider == "Alibaba Cloud"
+      virtual_machine.dig("details", "host_name")
     else
       virtual_machine.dig("details", "name")
     end

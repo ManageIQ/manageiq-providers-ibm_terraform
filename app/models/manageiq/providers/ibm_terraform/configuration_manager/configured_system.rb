@@ -1,6 +1,5 @@
 class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem < ::ConfiguredSystem
   supports :console
-
   include ProviderObjectMixin
 
   def provider_object(connection = nil)

@@ -24,6 +24,8 @@ class ManageIQ::Providers::IbmTerraform::ConfigurationManager < ManageIQ::Provid
   belongs_to :provider, :autosave => true, :dependent => :destroy
 
   has_many :orchestration_stacks, :dependent => :destroy, :foreign_key => "ems_id"
+  has_many :computer_systems, :through => :configured_systems
+  has_many :hardwares, :through => :computer_systems
 
   class << self
     delegate :params_for_create,
