@@ -1,5 +1,6 @@
 class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystemDecorator < ConfiguredSystemDecorator
   VENDOR_ICON_LABEL = {
+    "Alibaba Cloud"                => "alibaba",
     "Amazon EC2"                   => "amazon",
     "Google Cloud"                 => "gce",
     "Huawei Cloud"                 => "huawei",
@@ -11,6 +12,7 @@ class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystemD
     "Openstack"                    => "openstack",
     "Other"                        => "unknown",
     "SoftLayer"                    => "ibm",
+    "Tencent Cloud"                => "tencent",
     "VMware"                       => "vmware",
     "VMware vRealize Automation"   => "vmware",
     "VMware vSphere"               => "vmware",
