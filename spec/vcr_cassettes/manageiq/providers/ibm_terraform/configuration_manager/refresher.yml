@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://identity_url/idprovider/v1/auth/identitytoken
+    uri: https://cam-identity-url/idprovider/v1/auth/identitytoken
     body:
       encoding: UTF-8
       string: '{"grant_type":"password","username":"CAM_USER","password":"CAM_PASSWORD","scope":"openid"}'
@@ -60,7 +60,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:35 GMT
 - request:
     method: get
-    uri: https://cam_url/cam/tenant/api/v1/tenants/getTenantOnPrem
+    uri: https://cam-url/cam/tenant/api/v1/tenants/getTenantOnPrem
     body:
       encoding: US-ASCII
       string: ''
@@ -122,7 +122,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:36 GMT
 - request:
     method: get
-    uri: https://cam_url/cam/api/v1/templates?ace_orgGuid=all&filter=%7B%22where%22:%20%7B%22type%22:%20%7B%22neq%22:%20%22ContentRuntime%22%7D%7D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    uri: https://cam-url/cam/api/v1/templates?ace_orgGuid=all&filter=%7B%22where%22:%20%7B%22type%22:%20%7B%22neq%22:%20%22ContentRuntime%22%7D%7D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
     body:
       encoding: US-ASCII
       string: ''
@@ -191,7 +191,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:36 GMT
 - request:
     method: get
-    uri: https://cam_url/cam/api/v1/iaasresources?ace_orgGuid=all&filter=%7B%22where%22:%20%7B%22type%22:%20%22virtual_machine%22%7D,%22fields%22:%20%5B%22id%22,%20%22name%22,%20%22type%22,%20%22idFromProvider%22,%20%22stackId%22,%20%22specifications%22,%20%22details%22,%20%22ipaddresses%22,%20%22provider%22%5D,%22include%22:%20%7B%22relation%22:%20%22stacks%22,%20%22scope%22:%20%7B%22fields%22:%20%5B%22templateId%22%5D%7D%7D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    uri: https://cam-url/cam/api/v1/iaasresources?ace_orgGuid=all&filter=%7B%22where%22:%20%7B%22type%22:%20%22virtual_machine%22%7D,%22fields%22:%20%5B%22id%22,%20%22name%22,%20%22type%22,%20%22idFromProvider%22,%20%22stackId%22,%20%22specifications%22,%20%22details%22,%20%22ipaddresses%22,%20%22provider%22%5D,%22include%22:%20%7B%22relation%22:%20%22stacks%22,%20%22scope%22:%20%7B%22fields%22:%20%5B%22templateId%22%5D%7D%7D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
     body:
       encoding: US-ASCII
       string: ''
@@ -259,7 +259,7 @@ http_interactions:
   recorded_at: Wed, 04 Mar 2020 16:29:38 GMT
 - request:
     method: get
-    uri: https://cam_url/cam/api/v1/stacks?ace_orgGuid=all&filter=%7B%22fields%22:%20%5B%22id%22,%20%22name%22,%20%22templateId%22,%20%22templateName%22,%20%22status%22,%20%22templateProvider%22,%20%22created_at%22,%20%22lastUpdatedAt%22%5D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
+    uri: https://cam-url/cam/api/v1/stacks?ace_orgGuid=all&filter=%7B%22fields%22:%20%5B%22id%22,%20%22name%22,%20%22templateId%22,%20%22templateName%22,%20%22status%22,%20%22templateProvider%22,%20%22created_at%22,%20%22lastUpdatedAt%22%5D%7D&tenantId=f58e4d39-ac01-40fb-b259-88cd9a33f8e8
     body:
       encoding: US-ASCII
       string: ''
