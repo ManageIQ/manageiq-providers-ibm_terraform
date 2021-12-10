@@ -33,6 +33,8 @@ class ManageIQ::Providers::IbmTerraform::ConfigurationManager < ManageIQ::Provid
              :to => ManageIQ::Providers::IbmTerraform::Provider
   end
 
+  supports :create
+
   def self.ems_type
     @ems_type ||= "ibm_terraform_configuration".freeze
   end
