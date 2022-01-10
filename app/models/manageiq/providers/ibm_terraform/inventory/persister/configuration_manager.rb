@@ -9,7 +9,7 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Persister::ConfigurationMana
   end
 
   def add_cross_provider_vms
-    add_collection(configuration, :vms) do |builder|
+    add_collection(configuration, :vms, {}, {:without_sti => true}) do |builder|
       builder.add_properties(
         :parent         => nil,
         :arel           => Vm,
