@@ -114,9 +114,9 @@ class ManageIQ::Providers::IbmTerraform::Inventory::Parser::ConfigurationManager
     return nil if virtual_instance_ref.nil?
 
     if vm_provider == "Microsoft Azure"
-      persister.vms.lazy_find({:ems_ref => virtual_instance_ref}, {:ref => :by_ems_ref})
+      persister.cross_link_vms.lazy_find(virtual_instance_ref)
     else
-      persister.vms.lazy_find({:uid_ems => virtual_instance_ref}, {:ref => :by_uid_ems})
+      persister.cross_link_vms.lazy_find({:uid_ems => virtual_instance_ref}, {:ref => :by_uid_ems})
     end
   end
 
