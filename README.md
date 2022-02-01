@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.com/ManageIQ/manageiq-providers-ibm_terraform.svg?branch=master)](https://travis-ci.com/github/ManageIQ/manageiq-providers-ibm_terraform)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9ee8df54b708c3223c78/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9ee8df54b708c3223c78/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/test_coverage)
-[![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-ibm_terraform/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-ibm_terraform/master)
 
 [![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-ibm_terraform?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
