@@ -61,7 +61,6 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
         :name              => "LAMP stack deployment on AWS",
         :description       => "LAMP - A fully-integrated environment for full stack PHP web development.",
         :target_platform   => "Amazon EC2",
-        :supports_console? => true,
         :console_url       => "https://#{url}/cam/templates/#!/templatedetails/5d2f6030c068e4001c9bfbb7"
       )
       configuration_profile.id
@@ -105,7 +104,6 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
         :vendor                   => "Amazon EC2",
         :configuration_profile_id => configuration_profile_id,
         :orchestration_stack_id   => orchestration_stack_id,
-        :supports_console?        => true,
         :console_url              => "https://#{url}/cam/instances/#!/instanceDetails/5eac8d41ed4fa000171eaa1b"
       )
 
