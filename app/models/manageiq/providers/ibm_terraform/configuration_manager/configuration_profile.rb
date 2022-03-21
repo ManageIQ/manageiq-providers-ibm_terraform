@@ -1,5 +1,5 @@
 class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfigurationProfile < ::ConfigurationProfile
-  supports :console
+  supports :native_console
 
   def console_url
     base_url = provider.default_endpoint.url
