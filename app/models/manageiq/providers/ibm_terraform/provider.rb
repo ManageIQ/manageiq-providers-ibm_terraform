@@ -57,8 +57,8 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
                   :component  => "text-field",
                   :name       => "endpoints.identity.url",
                   :id         => "endpoints.identity.url",
-                  :label      => _("CloudPak for MCM URL"),
-                  :helperText => _("CloudPak for MCM URL. e.g. https://cp-console.apps.mydomain.com"),
+                  :label      => _("IBM Cloud Pak console"),
+                  :helperText => _("IBM Cloud Pak console URL. e.g. https://cp-console.apps.mydomain.com"),
                   :isRequired => true,
                   :validate   => [{:type => "required"}]
                 },
