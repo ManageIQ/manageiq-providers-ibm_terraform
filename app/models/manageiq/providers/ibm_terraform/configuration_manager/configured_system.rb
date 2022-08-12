@@ -1,5 +1,8 @@
 class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem < ::ConfiguredSystem
-  supports :native_console
+  supports :native_console do
+    _('No Cloud Pak URL') if provider.cpd_endpoint.url.blank?
+  end
+
   include ProviderObjectMixin
 
   def provider_object(connection = nil)
@@ -15,10 +18,10 @@ class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem 
   end
 
   def console_url
-    if (stack_id = orchestration_stack&.ems_ref)
-      base_url = provider.cpd_endpoint.url
-      "#{base_url}/cam/instances/#!/instanceDetails/#{stack_id}"
-    end
+    base_url = provider.cpd_endpoint.url
+    stack_id = orchestration_stack&.ems_ref
+
+    "#{base_url}/cam/instances/#!/instanceDetails/#{stack_id}" if stack_id && base_url
   end
 
   private
