@@ -7,6 +7,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager do
     [
       {"role" => "default", "url" => "https://cam.dev.multicloudops.io", "verify_ssl" => 0},
       {"role" => "identity", "url" => "https://cp-console.dev.multicloudops.io", "verify_ssl" => 0},
+      {"role" => "cpd", "url" => "https://cpd-cp4waiops.dev.multicloudops.io", "verify_ssl" => 0},
     ]
   end
   let(:authentications) do
@@ -39,6 +40,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager do
       endpoints = [
         {"role" => "default", "url" => "https://cam.dev.multicloudops.io", "verify_ssl" => 0},
         {"role" => "identity", "url" => "https://cp-console.dev.multicloudops.io", "verify_ssl" => 0},
+        {"role" => "cpd", "url" => "https://cpd-cp4waiops.dev.multicloudops.io", "verify_ssl" => 0},
       ]
       authentications = [
         {"authtype" => "default", "userid" => "admin", "password" => "password"}

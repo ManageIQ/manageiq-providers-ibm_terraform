@@ -16,7 +16,7 @@ class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem 
 
   def console_url
     if (stack_id = orchestration_stack&.ems_ref)
-      base_url = provider.default_endpoint.url
+      base_url = provider.cpd_endpoint.url
       "#{base_url}/cam/instances/#!/instanceDetails/#{stack_id}"
     end
   end
