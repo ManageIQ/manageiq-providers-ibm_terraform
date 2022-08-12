@@ -70,7 +70,7 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
                   :component  => "text-field",
                   :name       => "endpoints.cpd.url",
                   :id         => "endpoints.cpd.url",
-                  :label      => _("IBM Cloud Pak url"),
+                  :label      => _("IBM Cloud Pak URL"),
                   :helperText => _("IBM Cloud Pak URL. e.g. https://cpd-cp4waiops.apps.mydomain.com"),
                   :isRequired => true,
                   :validate   => [{:type => "required"}]
