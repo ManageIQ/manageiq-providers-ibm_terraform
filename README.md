@@ -1,12 +1,12 @@
 # ManageIQ::Providers::IbmTerraform
 
-[![CI](https://github.com/ManageIQ/manageiq-providers-ibm_terraform/actions/workflows/ci.yaml/badge.svg)](https://github.com/ManageIQ/manageiq-providers-ibm_terraform/actions/workflows/ci.yaml)
+[![CI](https://github.com/ManageIQ/manageiq-providers-ibm_terraform/actions/workflows/ci.yaml/badge.svg?branch=oparin)](https://github.com/ManageIQ/manageiq-providers-ibm_terraform/actions/workflows/ci.yaml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9ee8df54b708c3223c78/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9ee8df54b708c3223c78/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/test_coverage)
 
 [![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-ibm_terraform?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Build history for master branch](https://buildstats.info/github/chart/ManageIQ/manageiq-providers-ibm_terraform?branch=master&buildCount=50&includeBuildsFromPullRequest=false&showstats=false)](https://github.com/ManageIQ/manageiq-providers-ibm_terraform/actions?query=branch%3Amaster)
+[![Build history for oparin branch](https://buildstats.info/github/chart/ManageIQ/manageiq-providers-ibm_terraform?branch=oparin&buildCount=50&includeBuildsFromPullRequest=false&showstats=false)](https://github.com/ManageIQ/manageiq-providers-ibm_terraform/actions?query=branch%3Amaster)
 
 ManageIQ plugin for the Ibm Terraform provider.
 
