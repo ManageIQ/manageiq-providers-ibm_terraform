@@ -7,6 +7,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager do
     [
       {"role" => "default", "url" => "https://cam.dev.multicloudops.io", "verify_ssl" => 0},
       {"role" => "identity", "url" => "https://cp-console.dev.multicloudops.io", "verify_ssl" => 0},
+      {"role" => "cpd", "url" => "https://cpd-cp4waiops.dev.multicloudops.io", "verify_ssl" => 0},
     ]
   end
   let(:authentications) do
@@ -22,7 +23,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager do
       expect(config_manager.zone_id).to eq(zone.id)
 
       expect(config_manager.provider.name).to eq("IbmTerraform for test")
-      expect(config_manager.provider.endpoints.count).to eq(2)
+      expect(config_manager.provider.endpoints.count).to eq(3)
 
       # verify the configuration manager can be found in db by zone_id
       expect(described_class.where(:zone_id => zone.id)).to exist
@@ -39,6 +40,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager do
       endpoints = [
         {"role" => "default", "url" => "https://cam.dev.multicloudops.io", "verify_ssl" => 0},
         {"role" => "identity", "url" => "https://cp-console.dev.multicloudops.io", "verify_ssl" => 0},
+        {"role" => "cpd", "url" => "https://cpd-cp4waiops.dev.multicloudops.io", "verify_ssl" => 0},
       ]
       authentications = [
         {"authtype" => "default", "userid" => "admin", "password" => "password"}

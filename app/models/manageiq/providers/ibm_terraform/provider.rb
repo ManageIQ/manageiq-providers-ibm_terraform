@@ -15,6 +15,10 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
            :url=,
            :to => :identity_endpoint, :prefix => "identity"
 
+  delegate :url,
+           :url=,
+           :to => :cpd_endpoint, :prefix => "cpd"
+
   virtual_column :url, :type => :string, :uses => :endpoints
 
   before_validation :ensure_managers
@@ -59,6 +63,15 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
                   :id         => "endpoints.identity.url",
                   :label      => _("IBM Cloud Pak console"),
                   :helperText => _("IBM Cloud Pak console URL. e.g. https://cp-console.apps.mydomain.com"),
+                  :isRequired => true,
+                  :validate   => [{:type => "required"}]
+                },
+                {
+                  :component  => "text-field",
+                  :name       => "endpoints.cpd.url",
+                  :id         => "endpoints.cpd.url",
+                  :label      => _("IBM Cloud Pak URL"),
+                  :helperText => _("IBM Cloud Pak URL. e.g. https://cpd-cp4waiops.apps.mydomain.com"),
                   :isRequired => true,
                   :validate   => [{:type => "required"}]
                 },
@@ -161,6 +174,11 @@ class ManageIQ::Providers::IbmTerraform::Provider < ::Provider
   def identity_endpoint
     identity_endpoint = endpoints.detect { |e| e.role == "identity" }
     identity_endpoint || endpoints.build(:role => "identity")
+  end
+
+  def cpd_endpoint
+    cpd_endpoint = endpoints.detect { |e| e.role == "cpd" }
+    cpd_endpoint || endpoints.build(:role => "cpd")
   end
 
   def connect(options = {})

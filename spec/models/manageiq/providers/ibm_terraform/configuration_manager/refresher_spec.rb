@@ -13,11 +13,13 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
     let(:zone) { FactoryBot.create(:zone) }
     let(:params) { {:name => "IbmTerraform for test", :zone_id => zone.id} }
     let(:url) { Rails.application.secrets.ibm_terraform[:url] }
+    let(:cpd_url) { Rails.application.secrets.ibm_terraform[:cpd_url] }
     let(:endpoints) do
       identity_url = Rails.application.secrets.ibm_terraform[:identity_url]
       [
         {"role" => "default", "url" => "https://#{url}", "verify_ssl" => 0},
         {"role" => "identity", "url" => "https://#{identity_url}", "verify_ssl" => 0},
+        {"role" => "cpd", "url" => "https://#{cpd_url}", "verify_ssl" => 0},
       ]
     end
     let(:authentications) do
@@ -61,7 +63,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
         :name              => "LAMP stack deployment on AWS",
         :description       => "LAMP - A fully-integrated environment for full stack PHP web development.",
         :target_platform   => "Amazon EC2",
-        :console_url       => "https://#{url}/cam/templates/#!/templatedetails/5d2f6030c068e4001c9bfbb7"
+        :console_url       => "https://#{cpd_url}/cam/templates/#!/templatedetails/5d2f6030c068e4001c9bfbb7"
       )
       configuration_profile.id
     end
@@ -104,7 +106,7 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
         :vendor                   => "Amazon EC2",
         :configuration_profile_id => configuration_profile_id,
         :orchestration_stack_id   => orchestration_stack_id,
-        :console_url              => "https://#{url}/cam/instances/#!/instanceDetails/5eac8d41ed4fa000171eaa1b"
+        :console_url              => "https://#{cpd_url}/cam/instances/#!/instanceDetails/5eac8d41ed4fa000171eaa1b"
       )
 
       expect(aws_configured_system.counterpart).to eq(cross_link_aws_vm)
