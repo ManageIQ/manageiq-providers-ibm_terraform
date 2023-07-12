@@ -1,5 +1,5 @@
 class ManageIQ::Providers::IbmTerraform::ConfigurationManager::ConfiguredSystem < ::ConfiguredSystem
-  supports :native_console do
+  supports :management_console do
     _('No Cloud Pak URL') if provider.cpd_endpoint.url.blank?
   end
 
