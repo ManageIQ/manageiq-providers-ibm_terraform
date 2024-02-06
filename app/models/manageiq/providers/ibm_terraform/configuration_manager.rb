@@ -1,10 +1,4 @@
 class ManageIQ::Providers::IbmTerraform::ConfigurationManager < ManageIQ::Providers::ConfigurationManager
-  require_nested :ConfigurationProfile
-  require_nested :ConfiguredSystem
-  require_nested :OrchestrationStack
-  require_nested :Refresher
-  require_nested :RefreshWorker
-
   include ProcessTasksMixin
   delegate :authentications,
            :authentications=,
