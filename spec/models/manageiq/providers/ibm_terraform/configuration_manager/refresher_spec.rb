@@ -12,10 +12,10 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
 
     let(:zone) { FactoryBot.create(:zone) }
     let(:params) { {:name => "IbmTerraform for test", :zone_id => zone.id} }
-    let(:url) { Rails.application.secrets.ibm_terraform[:url] }
-    let(:cpd_url) { Rails.application.secrets.ibm_terraform[:cpd_url] }
+    let(:url) { VcrSecrets.ibm_terraform.url }
+    let(:cpd_url) { VcrSecrets.ibm_terraform.cpd_url }
     let(:endpoints) do
-      identity_url = Rails.application.secrets.ibm_terraform[:identity_url]
+      identity_url = VcrSecrets.ibm_terraform.identity_url
       [
         {"role" => "default", "url" => "https://#{url}", "verify_ssl" => 0},
         {"role" => "identity", "url" => "https://#{identity_url}", "verify_ssl" => 0},
@@ -23,8 +23,8 @@ describe ManageIQ::Providers::IbmTerraform::ConfigurationManager::Refresher do
       ]
     end
     let(:authentications) do
-      userid   = Rails.application.secrets.ibm_terraform[:user]
-      password = Rails.application.secrets.ibm_terraform[:password]
+      userid   = VcrSecrets.ibm_terraform.user
+      password = VcrSecrets.ibm_terraform.password
       [{"authtype" => "default", "userid" => userid, "password" => password}]
     end
 
