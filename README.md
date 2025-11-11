@@ -1,6 +1,6 @@
 # ManageIQ::Providers::IbmTerraform
 
-[![CI](https://github.com/ManageIQ/manageiq-providers-ibm_terraform/actions/workflows/ci.yaml/badge.svg?branch=spassky)](https://github.com/ManageIQ/manageiq-providers-ibm_terraform/actions/workflows/ci.yaml)
+[![CI](https://github.com/ManageIQ/manageiq-providers-ibm_terraform/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/ManageIQ/manageiq-providers-ibm_terraform/actions/workflows/ci.yaml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9ee8df54b708c3223c78/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9ee8df54b708c3223c78/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-providers-ibm_terraform/test_coverage)
 
